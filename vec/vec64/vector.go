@@ -89,3 +89,13 @@ func (v Vec64) Sigmoid() {
 	v.AddScalar(c.Number(1))
 	v.Pow(c.Number(-1))
 }
+
+// Sum Sum
+func (v Vec64) Sum() vec.Number {
+	sum := 0.
+	for _, n := range v.slice {
+		sum += n
+	}
+
+	return sum
+}

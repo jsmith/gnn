@@ -86,3 +86,10 @@ func TestSigmoid(t *testing.T) {
 	assert.Equal(t, 0.5, v.At(0))
 	assert.InDelta(t, 0.952574126822, v.At(3), 0.000001)
 }
+
+func TestSum(t *testing.T) {
+	initVec64()
+	n := v.Sum()
+	f := v.Creator().Float64(n)
+	assert.InDelta(t, 10., f, 0.00000001)
+}

@@ -19,10 +19,10 @@ func TestFCNN(t *testing.T) {
 		activation.Sigmoid{},
 	}
 
-  trainer =
+	trainer = Trainer{}
 
-  epochs := 100
-  for i := 1; i <= epochs; i++ {
+	epochs := 100
+	for i := 1; i <= epochs; i++ {
 
-  }
+	}
 }

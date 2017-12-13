@@ -20,6 +20,7 @@ type Vector interface {
 	AddScalar(n Number)
 	Len() int
 	Sigmoid()
+	Sum() Number
 }
 
 // Creator provides context for the vector
@@ -27,4 +28,6 @@ type Creator interface {
 	Make(i int) Vector
 	Number(n float64) Number
 	List(data []float64) NumberList
+	Float64(n Number) float64
+	Sub(v1, v2 Vector) Vector
 }
