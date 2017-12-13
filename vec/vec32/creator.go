@@ -7,7 +7,7 @@ type Creator struct{}
 
 // Number Number
 func (c Creator) Number(n float64) vec.Number {
-	return float32(n)
+	return float64(n)
 }
 
 // Make Make

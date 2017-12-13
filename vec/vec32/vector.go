@@ -80,6 +80,7 @@ func (v Vec64) Exp() {
 func (v Vec64) Sigmoid() {
 	c := v.Creator()
 	v.Mul(c.Number(-1))
+	v.Exp()
 	v.AddScalar(c.Number(1))
 	v.Pow(c.Number(-1))
 }
