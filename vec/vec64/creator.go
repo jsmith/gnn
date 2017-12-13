@@ -35,6 +35,14 @@ func (c Creator) Sub(v1, v2 vec.Vector) vec.Vector {
 	return v
 }
 
+// Sub Sub
+func (c Creator) Copy(v vec.Vector) vec.Vector {
+	new := c.Make(v.Len()).(Vec64)
+	copy(new.slice, v.(Vec64).slice)
+
+	return new
+}
+
 // Float64 Float64
 func (c Creator) Float64(n vec.Number) float64 {
 	return n.(float64)

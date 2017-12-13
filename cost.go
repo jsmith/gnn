@@ -22,3 +22,28 @@ func (mse MSE) Cost(expected, actual vec.Vector) float64 {
 
 	return f
 }
+
+// Entropy Entropy
+type Entropy struct{}
+
+// Cost Cost
+func (e Entropy) Cost(expected, actual vec.Vector) float64 {
+	c := expected.Creator()
+
+	actual.Log()
+	expected.Mul(actual)
+	cost := expected.Sum()
+
+	expected = expectedCopy
+	actual = actualCopy
+
+	expected.Scale(c.Number(-1))
+	expected.AddScalar(c.Number(1))
+	actual.Scale(c.Number(-1))
+	actual.AddScalar(c.Number(1))
+	actual.Log()
+	expected.Mul(actual)
+	cost.Add(expected.Sum())
+
+	return c.Float64(cost)
+}

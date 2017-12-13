@@ -30,4 +30,5 @@ type Creator interface {
 	List(data []float64) NumberList
 	Float64(n Number) float64
 	Sub(v1, v2 Vector) Vector
+	Copy(v Vector) Vector
 }
