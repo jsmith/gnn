@@ -1,10 +1,10 @@
 package gnn
 
-import "gonum.org/v1/gonum/mat"
+import "github.com/jacsmith21/gnn/vec"
 
 // Layer a layer in a neural network
 type Layer interface {
-	Forward(x mat.Vector)
+	Forward(x vec.Vector)
 	Backward(grad Grad)
 }
 

@@ -26,6 +26,11 @@ func (v Vec64) Set(i int, n vec.Number) {
 	v.slice[i] = n.(float64)
 }
 
+// SetData SetData
+func (v Vec64) SetData(data vec.NumberList) {
+	copy(v.slice, data.([]float64))
+}
+
 // Add Add
 func (v Vec64) Add(other vec.Vector) {
 	for i, n := range other.(Vec64).slice {
@@ -53,8 +58,8 @@ func (v Vec64) Len() int {
 	return len(v.slice)
 }
 
-// Mul Mul
-func (v Vec64) Mul(n vec.Number) {
+// Scale Scale
+func (v Vec64) Scale(n vec.Number) {
 	f := n.(float64)
 	for i := range v.slice {
 		v.slice[i] *= f
@@ -79,7 +84,7 @@ func (v Vec64) Exp() {
 // Sigmoid Sigmoid
 func (v Vec64) Sigmoid() {
 	c := v.Creator()
-	v.Mul(c.Number(-1))
+	v.Scale(c.Number(-1))
 	v.Exp()
 	v.AddScalar(c.Number(1))
 	v.Pow(c.Number(-1))

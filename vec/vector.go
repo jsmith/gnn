@@ -1,14 +1,18 @@
 package vec
 
-// Number a number
+// Number Number
 type Number interface{}
+
+// NumberList NumberList
+type NumberList interface{}
 
 // Vector a vector
 type Vector interface {
 	Creator() Creator
 	At(i int) Number
 	Set(i int, n Number)
-	Mul(n Number)
+	SetData(data NumberList)
+	Scale(n Number)
 	Exp()
 	Pow(n Number)
 	Sub(other Vector)
@@ -22,4 +26,5 @@ type Vector interface {
 type Creator interface {
 	Make(i int) Vector
 	Number(n float64) Number
+	List(data []float64) NumberList
 }

@@ -23,9 +23,17 @@ func TestSet(t *testing.T) {
 	assert.Equal(t, 6., v.At(3))
 }
 
-func TestMul(t *testing.T) {
+func TestSetData(t *testing.T) {
 	initVec64()
-	v.Mul(v.Creator().Number(2))
+	list := v.Creator().List([]float64{4, 3, 2, 1, 0})
+	v.SetData(list)
+	assert.Equal(t, 4., v.At(0))
+	assert.Equal(t, 1., v.At(3))
+}
+
+func TestScale(t *testing.T) {
+	initVec64()
+	v.Scale(v.Creator().Number(2))
 	assert.Equal(t, 0., v.At(0))
 	assert.Equal(t, 6., v.At(3))
 }
