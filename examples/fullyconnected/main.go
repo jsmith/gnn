@@ -1,28 +1,31 @@
 package test
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/jacsmith21/gnn"
 	"github.com/jacsmith21/gnn/activation"
 	"github.com/jacsmith21/gnn/neuron"
-	"github.com/jacsmith21/gnn/vec/vec64"
 )
 
+// TestFCNN TestFCNN
 func TestFCNN(t *testing.T) {
-	c := vec64.Creator{}
 
 	nn := gnn.Net{
-		neuron.NewFC(c, 10, 10),
+		neuron.NewFC(10, 10),
 		activation.ReLU{},
-		neuron.NewFC(c, 10, 1),
+		neuron.NewFC(10, 1),
 		activation.Sigmoid{},
 	}
 
-	trainer = Trainer{}
+	trainer := gnn.Trainer{
+		LearningRate: 0.01,
+	}
 
 	epochs := 100
 	for i := 1; i <= epochs; i++ {
-
+		fmt.Print(nn)
+		fmt.Print(trainer)
 	}
 }

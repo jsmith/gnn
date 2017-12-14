@@ -17,7 +17,7 @@ func Sub(v1, v2 Vector) Vector {
 // Copy Copy
 func Copy(from Vector) Vector {
 	to := Make(from.Len())
-	copy(to.slice, from.slice)
+	copy(to.Slice, from.Slice)
 
 	return to
 }

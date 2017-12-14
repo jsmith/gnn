@@ -3,12 +3,12 @@ package gnn
 import "github.com/jacsmith21/gnn/vec"
 
 // Label Label
-type Label vec.Number
+type Label float64
 
 // Sample Sample
 type Sample struct {
-	x vec.Vector
-	y Label
+	Input vec.Vector
+	Label Label
 }
 
 // DataSet DataSet

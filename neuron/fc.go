@@ -16,16 +16,16 @@ type FC struct {
 }
 
 // NewFC NewFC
-func NewFC(c vec.Creator, in, out int) *FC {
+func NewFC(in, out int) *FC {
 	fc := FC{
 		In:      in,
 		Out:     out,
-		Weights: c.Make(in * out),
-		Biases:  c.Make(out),
+		Weights: vec.Make(in * out),
+		Biases:  vec.Make(out),
 	}
 
 	vec.Rand(fc.Weights, vec.Gaussian)
-	fc.Weights.Scale(c.Number(1 / math.Sqrt(float64(in))))
+	fc.Weights.Scale(1 / math.Sqrt(float64(in)))
 
 	return &fc
 }
