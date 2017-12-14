@@ -16,24 +16,28 @@ type Sample struct {
 }
 
 // DataSet DataSet
-type DataSet []Sample
+type DataSet struct {
+	data   []vec.Vector
+	labels vec.Vector
+}
 
-// Len Len
-func (d DataSet) Len() int {
-	return len(d)
+// SampleCount SampleCount
+func (d DataSet) SampleCount() int {
+	return d.labels.Len()
 }
 
 // Shuffle Shuffle
 func (d DataSet) Shuffle() {
-	for i := len(d) - 1; i > 0; i-- {
+	for i := d.SampleCount() - 1; i > 0; i-- {
 		j := rand.Intn(i + 1)
-		d[i], d[j] = d[j], d[i]
+		d.data[i], d.data[j] = d.data[j], d.data[i]
+		d.labels.Swap(i, j)
 	}
 }
 
 // Batches Batches
 func (d DataSet) Batches(batchSize int) []DataSet {
-	sampleCount := d.Len()
+	sampleCount := d.SampleCount()
 	batchCount := sampleCount / batchSize
 	if sampleCount%batchSize != 0 {
 		batchCount++
@@ -47,7 +51,7 @@ func (d DataSet) Batches(batchSize int) []DataSet {
 			to = sampleCount
 		}
 
-		batches[i] = d[from:to]
+		batches[i] = DataSet{d.data[from:to], vec.Slice(d.labels, from, to)}
 	}
 
 	return batches

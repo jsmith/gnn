@@ -6,75 +6,75 @@ import (
 
 // Vector Vector
 type Vector struct {
-	Slice []float64
+	slice []float64
 }
 
 // At At
 func (v Vector) At(i int) float64 {
-	return v.Slice[i]
+	return v.slice[i]
 }
 
 // Set Set
 func (v Vector) Set(i int, f float64) {
-	v.Slice[i] = f
+	v.slice[i] = f
 }
 
 // SetData SetData
 func (v Vector) SetData(data []float64) {
-	copy(v.Slice, data)
+	copy(v.slice, data)
 }
 
 // Add Add
 func (v Vector) Add(other Vector) {
-	for i, n := range other.Slice {
-		v.Slice[i] += n
+	for i, n := range other.slice {
+		v.slice[i] += n
 	}
 }
 
 // AddScalar AddScalar
 func (v Vector) AddScalar(f float64) {
-	for i := range v.Slice {
-		v.Slice[i] += f
+	for i := range v.slice {
+		v.slice[i] += f
 	}
 }
 
 // Sub Sum
 func (v Vector) Sub(other Vector) {
-	for i, f := range other.Slice {
-		v.Slice[i] -= f
+	for i, f := range other.slice {
+		v.slice[i] -= f
 	}
 }
 
 // Mul Mul
 func (v Vector) Mul(other Vector) {
-	for i, f := range other.Slice {
-		v.Slice[i] *= f
+	for i, f := range other.slice {
+		v.slice[i] *= f
 	}
 }
 
 // Len returns len(v)
 func (v Vector) Len() int {
-	return len(v.Slice)
+	return len(v.slice)
 }
 
 // Scale Scale
 func (v Vector) Scale(f float64) {
-	for i := range v.Slice {
-		v.Slice[i] *= f
+	for i := range v.slice {
+		v.slice[i] *= f
 	}
 }
 
 // Pow Pow
 func (v Vector) Pow(f float64) {
-	for i := range v.Slice {
-		v.Slice[i] = math.Pow(v.Slice[i], f)
+	for i := range v.slice {
+		v.slice[i] = math.Pow(v.slice[i], f)
 	}
 }
 
 // Exp Exp
 func (v Vector) Exp() {
-	for i := range v.Slice {
-		v.Slice[i] = math.Exp(v.Slice[i])
+	for i := range v.slice {
+		v.slice[i] = math.Exp(v.slice[i])
 	}
 }
 
@@ -89,7 +89,7 @@ func (v Vector) Sigmoid() {
 // Sum Sum
 func (v Vector) Sum() float64 {
 	sum := 0.
-	for _, n := range v.Slice {
+	for _, n := range v.slice {
 		sum += n
 	}
 
@@ -98,7 +98,12 @@ func (v Vector) Sum() float64 {
 
 // Ln Ln
 func (v Vector) Ln() {
-	for i, n := range v.Slice {
-		v.Slice[i] = math.Log(n)
+	for i, n := range v.slice {
+		v.slice[i] = math.Log(n)
 	}
+}
+
+// Swap Swap
+func (v Vector) Swap(i, j int) {
+	v.slice[i], v.slice[j] = v.slice[j], v.slice[i]
 }

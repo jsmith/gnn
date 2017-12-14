@@ -11,7 +11,7 @@ func (r ReLU) Forward(v vec.Vector) {
 }
 
 // Backward Backward
-func (r ReLU) Backward(g Grad) {
+func (r ReLU) Backward() {
 
 }
 
@@ -24,6 +24,6 @@ func (s Sigmoid) Forward(v vec.Vector) {
 }
 
 // Backward Backward
-func (s Sigmoid) Backward(g Grad) {
+func (s Sigmoid) Backward() {
 
 }

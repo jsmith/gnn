@@ -3,7 +3,6 @@ package neuron
 import (
 	"math"
 
-	"github.com/jacsmith21/gnn"
 	"github.com/jacsmith21/gnn/vec"
 )
 
@@ -38,6 +37,6 @@ func (f FC) Forward(v vec.Vector) {
 }
 
 // Backward Backward
-func (f FC) Backward(g gnn.Grad) {
+func (f FC) Backward() {
 
 }

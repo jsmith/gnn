@@ -102,8 +102,15 @@ func TestMul(t *testing.T) {
 
 func TestLn(t *testing.T) {
 	initVector()
-	v.Slice[0] = 1 // ln(0) is undefined
+	v.slice[0] = 1 // ln(0) is undefined
 	v.Ln()
 	assert.Equal(t, 0., v.At(0))
 	assert.InDelta(t, 1.09861228, v.At(3), 0.00001)
+}
+
+func TestSwap(t *testing.T) {
+	initVector()
+	v.Swap(0, 1)
+	assert.Equal(t, 1., v.At(0))
+	assert.Equal(t, 0., v.At(1))
 }

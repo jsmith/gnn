@@ -6,6 +6,11 @@ func Make(size int) Vector {
 	return Vector{slice}
 }
 
+// Init Init
+func Init(slice []float64) Vector {
+	return Vector{slice}
+}
+
 // Sub Sub
 func Sub(v1, v2 Vector) Vector {
 	v := Copy(v1)
@@ -17,7 +22,12 @@ func Sub(v1, v2 Vector) Vector {
 // Copy Copy
 func Copy(from Vector) Vector {
 	to := Make(from.Len())
-	copy(to.Slice, from.Slice)
+	copy(to.slice, from.slice)
 
 	return to
+}
+
+// Slice Slice
+func Slice(v Vector, from, to int) Vector {
+	return Vector{v.slice[from:to]}
 }

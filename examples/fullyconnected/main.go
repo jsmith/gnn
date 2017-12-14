@@ -5,18 +5,17 @@ import (
 	"testing"
 
 	"github.com/jacsmith21/gnn"
-	"github.com/jacsmith21/gnn/activation"
 	"github.com/jacsmith21/gnn/neuron"
 )
 
-// TestFCNN TestFCNN
-func TestFCNN(t *testing.T) {
+// FCNN FCNN
+func FCNN(t *testing.T) {
 
 	nn := gnn.Net{
 		neuron.NewFC(10, 10),
-		activation.ReLU{},
+		gnn.ReLU{},
 		neuron.NewFC(10, 1),
-		activation.Sigmoid{},
+		gnn.Sigmoid{},
 	}
 
 	trainer := gnn.Trainer{

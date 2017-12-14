@@ -8,10 +8,12 @@ import (
 )
 
 func TestDataSetLen(t *testing.T) {
-	v := vec.Vector{Slice: []float64{1, 1, 1}}
+	x := vec.Init([]float64{1, 1, 1})
+	y := vec.Init([]float64{1})
 	dataset := DataSet{
-		{v, 1},
+		data:   []vec.Vector{x},
+		labels: y,
 	}
 
-	assert.Equal(t, 1, dataset.Len())
+	assert.Equal(t, 1, dataset.SampleCount())
 }
