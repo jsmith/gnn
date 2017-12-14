@@ -53,6 +53,13 @@ func (v Vec64) Sub(other vec.Vector) {
 	}
 }
 
+// Sub Sum
+func (v Vec64) Mul(other vec.Vector) {
+	for i, n := range other.(Vec64).slice {
+		v.slice[i] *= n
+	}
+}
+
 // Len returns len(v)
 func (v Vec64) Len() int {
 	return len(v.slice)

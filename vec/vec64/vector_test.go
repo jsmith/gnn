@@ -93,3 +93,10 @@ func TestSum(t *testing.T) {
 	f := v.Creator().Float64(n)
 	assert.InDelta(t, 10., f, 0.00000001)
 }
+
+func TestMul(t *testing.T) {
+	initVec64()
+	v.Mul(Vec64{[]float64{0, 1, 2, 3, 4}})
+	assert.Equal(t, 0., v.At(0))
+	assert.Equal(t, 9., v.At(3))
+}

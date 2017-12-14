@@ -13,6 +13,7 @@ type Vector interface {
 	Set(i int, n Number)
 	SetData(data NumberList)
 	Scale(n Number)
+	Mul(other Vector)
 	Exp()
 	Pow(n Number)
 	Sub(other Vector)
@@ -21,6 +22,8 @@ type Vector interface {
 	Len() int
 	Sigmoid()
 	Sum() Number
+	Copy() Vector
+	Log()
 }
 
 // Creator provides context for the vector
@@ -32,3 +35,5 @@ type Creator interface {
 	Sub(v1, v2 Vector) Vector
 	Copy(v Vector) Vector
 }
+
+type

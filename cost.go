@@ -28,7 +28,9 @@ type Entropy struct{}
 
 // Cost Cost
 func (e Entropy) Cost(expected, actual vec.Vector) float64 {
-	c := expected.Creator()
+	negOne := expected.Creator().Number(-1)
+	expectedCopy := expected.Copy()
+	actualCopy := actual.Copy()
 
 	actual.Log()
 	expected.Mul(actual)
@@ -37,10 +39,10 @@ func (e Entropy) Cost(expected, actual vec.Vector) float64 {
 	expected = expectedCopy
 	actual = actualCopy
 
-	expected.Scale(c.Number(-1))
-	expected.AddScalar(c.Number(1))
-	actual.Scale(c.Number(-1))
-	actual.AddScalar(c.Number(1))
+	expected.Scale(negOne)
+	expected.AddScalar(negOne)
+	actual.Scale(negOne)
+	actual.AddScalar(negOne)
 	actual.Log()
 	expected.Mul(actual)
 	cost.Add(expected.Sum())
