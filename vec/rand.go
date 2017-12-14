@@ -23,5 +23,5 @@ func Rand(v Vector, d Distribution) {
 		}
 	}
 
-	v.SetData(v.Creator().List(data))
+	v.SetData(data)
 }

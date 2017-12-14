@@ -1,39 +1,97 @@
 package vec
 
-// Number Number
-type Number interface{}
+import (
+	"math"
+)
 
-// NumberList NumberList
-type NumberList interface{}
-
-// Vector a vector
-type Vector interface {
-	Creator() Creator
-	At(i int) Number
-	Set(i int, n Number)
-	SetData(data NumberList)
-	Scale(n Number)
-	Mul(other Vector)
-	Exp()
-	Pow(n Number)
-	Sub(other Vector)
-	Add(other Vector)
-	AddScalar(n Number)
-	Len() int
-	Sigmoid()
-	Sum() Number
-	Copy() Vector
-	Log()
+// Vector Vector
+type Vector struct {
+	slice []float64
 }
 
-// Creator provides context for the vector
-type Creator interface {
-	Make(i int) Vector
-	Number(n float64) Number
-	List(data []float64) NumberList
-	Float64(n Number) float64
-	Sub(v1, v2 Vector) Vector
-	Copy(v Vector) Vector
+// At At
+func (v Vector) At(i int) float64 {
+	return v.slice[i]
 }
 
-type
+// Set Set
+func (v Vector) Set(i int, f float64) {
+	v.slice[i] = f
+}
+
+// SetData SetData
+func (v Vector) SetData(data []float64) {
+	copy(v.slice, data)
+}
+
+// Add Add
+func (v Vector) Add(other Vector) {
+	for i, n := range other.slice {
+		v.slice[i] += n
+	}
+}
+
+// AddScalar AddScalar
+func (v Vector) AddScalar(f float64) {
+	for i := range v.slice {
+		v.slice[i] += f
+	}
+}
+
+// Sub Sum
+func (v Vector) Sub(other Vector) {
+	for i, f := range other.slice {
+		v.slice[i] -= f
+	}
+}
+
+// Mul Mul
+func (v Vector) Mul(other Vector) {
+	for i, f := range other.slice {
+		v.slice[i] *= f
+	}
+}
+
+// Len returns len(v)
+func (v Vector) Len() int {
+	return len(v.slice)
+}
+
+// Scale Scale
+func (v Vector) Scale(f float64) {
+	for i := range v.slice {
+		v.slice[i] *= f
+	}
+}
+
+// Pow Pow
+func (v Vector) Pow(f float64) {
+	for i := range v.slice {
+		v.slice[i] = math.Pow(v.slice[i], f)
+	}
+}
+
+// Exp Exp
+func (v Vector) Exp() {
+	for i := range v.slice {
+		v.slice[i] = math.Exp(v.slice[i])
+	}
+}
+
+// Sigmoid Sigmoid
+func (v Vector) Sigmoid() {
+	v.Scale(-1)
+	v.Exp()
+	v.AddScalar(1)
+	v.Pow(-1)
+}
+
+// Sum Sum
+func (v Vector) Sum() float64 {
+	sum := 0.
+	for _, n := range v.slice {
+		sum += n
+	}
+
+	return sum
+}
