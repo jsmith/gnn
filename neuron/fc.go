@@ -30,12 +30,10 @@ func NewFC(in, out int) *FC {
 }
 
 // Forward Forward
-func (f FC) Forward(v []vec.Vector) []vec.Vector {
+func (f FC) Forward(v []vec.Vector) {
 	for i := 0; i < f.Out; i++ {
 
 	}
-
-	return nil
 }
 
 // Backward Backward

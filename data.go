@@ -46,8 +46,9 @@ func (d DataSet) GenerateBatches(batchSize int) []DataSet {
 	if batchSize == 0 {
 		panic("batch size cannot be 0")
 	}
+	copy := Copy(d)
 
-	sampleCount := d.SampleCount()
+	sampleCount := copy.SampleCount()
 	batchCount := sampleCount / batchSize
 	if sampleCount%batchSize != 0 {
 		batchCount++
@@ -61,8 +62,20 @@ func (d DataSet) GenerateBatches(batchSize int) []DataSet {
 			to = sampleCount
 		}
 
-		batches[i] = DataSet{d.data[from:to], d.labels[from:to]}
+		batches[i] = DataSet{copy.data[from:to], copy.labels[from:to]}
 	}
 
 	return batches
+}
+
+// Copy Copy
+func Copy(d DataSet) DataSet {
+	data := make([]vec.Vector, len(d.data))
+	labels := make([]vec.Vector, len(d.labels))
+	copy(data, d.data)
+	copy(labels, d.labels)
+	return DataSet{
+		data:   data,
+		labels: labels,
+	}
 }

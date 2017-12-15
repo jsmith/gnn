@@ -8,19 +8,21 @@ import (
 )
 
 func TestSECost(t *testing.T) {
-	mse := SE{}
-	v1 := vec.Init([]float64{0, 1, 2})
-	v2 := vec.Init([]float64{0, 0, 0})
-	cost := mse.Cost(v1, v2)
+	se := SE{}
+	exp := []vec.Vector{vec.Init([]float64{0, 1, 2})}
+	act := []vec.Vector{vec.Init([]float64{0, 0, 0})}
+	cost := se.Cost(exp, act)
 
-	assert.Equal(t, (0. + 1. + 4.), cost)
+	assert.Equal(t, 1, cost.Len())
+	assert.Equal(t, (0. + 1. + 4.), cost.At(0))
 }
 
 func TestSEDef(t *testing.T) {
 	mse := SE{}
-	v1 := vec.Init([]float64{0, 1, 2})
-	v2 := vec.Init([]float64{0, 0, 0})
-	cost := mse.Der(v1, v2)
+	exp := []vec.Vector{vec.Init([]float64{0, 1, 2})}
+	act := []vec.Vector{vec.Init([]float64{0, 0, 0})}
+	cost := mse.Der(exp, act)
 
-	assert.Equal(t, (0.+1.+2.)*2, cost)
+	assert.Equal(t, 1, cost.Len())
+	assert.Equal(t, -(0.+1.+2.)*2, cost.At(0))
 }

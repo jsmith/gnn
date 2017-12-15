@@ -114,3 +114,13 @@ func TestSwap(t *testing.T) {
 	assert.Equal(t, 1., v.At(0))
 	assert.Equal(t, 0., v.At(1))
 }
+
+func TestReLU(t *testing.T) {
+	initVector()
+	v.AddScalar(-2)
+	v.ReLU()
+	assert.Equal(t, 0., v.At(0))
+	assert.Equal(t, 0., v.At(1))
+	assert.Equal(t, 0., v.At(2))
+	assert.Equal(t, 1., v.At(3))
+}

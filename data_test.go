@@ -60,6 +60,20 @@ func TestGenerateBatches(t *testing.T) {
 
 func TestGenerateEmptyBatches(t *testing.T) {
 	initDataSet()
-
 	assert.Panics(t, func() { d.GenerateBatches(0) })
+}
+
+func TestDataSetCopy(t *testing.T) {
+	initDataSet()
+	c := Copy(d)
+	d.labels[0].Set(0, 500)
+	d.data[0].Set(0, 500)
+
+	assert.Equal(t, 4, len(c.labels))
+	assert.Equal(t, 1, c.labels[0].Len())
+	assert.Equal(t, 0., c.labels[0].At(0))
+
+	assert.Equal(t, 4, len(c.data))
+	assert.Equal(t, 3, c.data[0].Len())
+	assert.Equal(t, 0., c.data[0].At(0))
 }

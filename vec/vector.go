@@ -107,3 +107,10 @@ func (v Vector) Ln() {
 func (v Vector) Swap(i, j int) {
 	v.slice[i], v.slice[j] = v.slice[j], v.slice[i]
 }
+
+// ReLU ReLU
+func (v Vector) ReLU() {
+	for i, n := range v.slice {
+		v.slice[i] = math.Max(n, 0)
+	}
+}
