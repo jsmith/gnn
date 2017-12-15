@@ -1,6 +1,8 @@
 package mat
 
-import "github.com/jacsmith21/gnn/vec"
+import (
+	"github.com/jacsmith21/gnn/vec"
+)
 
 // Matrix Matrix
 type Matrix struct {
@@ -45,5 +47,21 @@ func (m Matrix) SwapCols(i, j int) {
 func (m Matrix) Scale(f float64) {
 	for i := range m.cols {
 		m.cols[i].Scale(f)
+	}
+}
+
+func (m *Matrix) Transpose() {
+	t := Make(m.ColCount(), m.RowCount())
+	for i := 0; i < m.RowCount(); i++ {
+		for j := 0; j < m.ColCount(); j++ {
+			t.Set(j, i, m.At(i, j))
+		}
+	}
+	m.cols = t.cols
+}
+
+func (m Matrix) AddCol(col vec.Vector) {
+	for _, c := range m.cols {
+		c.Add(col)
 	}
 }

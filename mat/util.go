@@ -14,9 +14,11 @@ func Make(i, j int) Matrix {
 	return Matrix{vecs}
 }
 
-// Init initilizes a Matrix with column vectors
-func Init(vecs ...vec.Vector) Matrix {
-	return Matrix{vecs}
+// Init initilizes a Matrix with given row vectors
+func Init(rows ...vec.Vector) Matrix {
+	mat := Matrix{rows}
+	mat.Transpose()
+	return mat
 }
 
 // Copy returns a copy of the given Matrix
