@@ -1,6 +1,8 @@
 package mat
 
 import (
+	"fmt"
+
 	"github.com/jacsmith21/gnn/vec"
 )
 
@@ -43,6 +45,7 @@ func Slice(m Matrix, from, to int) Matrix {
 
 // Mul performs the matrix multiplication m1 x m2
 func Mul(m1, m2 Matrix) Matrix {
+	fmt.Println(m1)
 	res := Make(m1.RowCount(), m2.ColCount())
 	for i := 0; i < m1.RowCount(); i++ {
 		for j := 0; j < m2.ColCount(); j++ {

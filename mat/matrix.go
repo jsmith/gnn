@@ -1,6 +1,8 @@
 package mat
 
 import (
+	"fmt"
+
 	"github.com/jacsmith21/gnn/vec"
 )
 
@@ -50,6 +52,7 @@ func (m Matrix) Scale(f float64) {
 	}
 }
 
+// Transpose transposes the matrix
 func (m *Matrix) Transpose() {
 	t := Make(m.ColCount(), m.RowCount())
 	for i := 0; i < m.RowCount(); i++ {
@@ -60,8 +63,29 @@ func (m *Matrix) Transpose() {
 	m.cols = t.cols
 }
 
+// AddCol adds the given vector to each column vector
 func (m Matrix) AddCol(col vec.Vector) {
 	for _, c := range m.cols {
 		c.Add(col)
 	}
+}
+
+// Sigmoid applies the sigmoid function to each element
+func (m Matrix) Sigmoid() {
+	for _, c := range m.cols {
+		c.Sigmoid()
+	}
+}
+
+// ReLU applies the ReLU function to each element
+func (m Matrix) ReLU() {
+	for _, c := range m.cols {
+		c.ReLU()
+	}
+}
+
+func (m Matrix) String() string {
+	c := Copy(m)
+	c.Transpose()
+	return fmt.Sprintf("%+v", c)
 }

@@ -81,3 +81,20 @@ func TestAddCol(t *testing.T) {
 	assert.Equal(t, 1., m.At(0, 0))
 	assert.Equal(t, 2., m.At(1, 3))
 }
+
+func TestRelu(t *testing.T) {
+	initMatrix()
+	m.Set(0, 0, -1)
+	m.ReLU()
+
+	assert.Equal(t, 0., m.At(0, 0))
+	assert.Equal(t, 1., m.At(0, 1))
+}
+
+func TestSigmoid(t *testing.T) {
+	initMatrix()
+	m.Sigmoid()
+
+	assert.Equal(t, 0.5, m.At(0, 0))
+	assert.InDelta(t, 0.731058578630004, m.At(0, 1), 0.00000001)
+}
