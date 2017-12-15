@@ -3,9 +3,9 @@ package gnn
 import (
 	"testing"
 
+	"github.com/jacsmith21/gnn/mocks"
 	"github.com/jacsmith21/gnn/vec"
 	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/mock"
 )
 
 var d DataSet
@@ -25,17 +25,6 @@ func initDataSet() {
 	}
 }
 
-type RanderMock struct {
-	count int
-	mock.Mock
-}
-
-func (m *RanderMock) Intn(n int) int {
-	args := m.Called(n)
-	return args.Int(0)
-
-}
-
 func TestSampleCount(t *testing.T) {
 	initDataSet()
 	assert.Equal(t, 4, d.SampleCount())
@@ -43,11 +32,11 @@ func TestSampleCount(t *testing.T) {
 
 func TestShuffle(t *testing.T) {
 	initDataSet()
-	rander := new(RanderMock)
+
+	rander := new(mocks.Rander)
 	rander.On("Intn", 2).Return(2)
 	rander.On("Intn", 3).Return(3)
 	rander.On("Intn", 4).Return(0)
-
 	d.Shuffle(rander)
 
 	assert.Equal(t, 2., d.labels[3].At(0))
@@ -58,5 +47,19 @@ func TestShuffle(t *testing.T) {
 }
 
 func TestGenerateBatches(t *testing.T) {
+	initDataSet()
+	batches := d.GenerateBatches(3)
 
+	assert.Equal(t, 3, batches[0].SampleCount())
+	assert.Equal(t, 0., batches[0].labels[0].At(0))
+	assert.Equal(t, 1., batches[0].labels[1].At(0))
+
+	assert.Equal(t, 1, batches[1].SampleCount())
+	assert.Equal(t, 3., batches[1].labels[0].At(0))
+}
+
+func TestGenerateEmptyBatches(t *testing.T) {
+	initDataSet()
+
+	assert.Panics(t, func() { d.GenerateBatches(0) })
 }

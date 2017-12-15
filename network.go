@@ -12,6 +12,11 @@ type Layer interface {
 type Net []Layer
 
 // Forward Forward
-func (n Net) Forward(d DataSet) {
+func (n Net) Forward(d []vec.Vector) []vec.Vector {
+	output := d
+	for _, layer := range n {
+		output = layer.Forward(output)
+	}
 
+	return output
 }

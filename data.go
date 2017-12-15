@@ -43,6 +43,10 @@ func (d DataSet) Shuffle(r vec.Rander) {
 
 // GenerateBatches GenerateBatches
 func (d DataSet) GenerateBatches(batchSize int) []DataSet {
+	if batchSize == 0 {
+		panic("batch size cannot be 0")
+	}
+
 	sampleCount := d.SampleCount()
 	batchCount := sampleCount / batchSize
 	if sampleCount%batchSize != 0 {
