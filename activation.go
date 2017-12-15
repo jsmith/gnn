@@ -1,14 +1,17 @@
 package gnn
 
-import "github.com/jacsmith21/gnn/vec"
+import (
+	"github.com/jacsmith21/gnn/mat"
+	"github.com/jacsmith21/gnn/vec"
+)
 
 // ReLU ReLU
 type ReLU struct{}
 
 // Forward Forward
-func (r ReLU) Forward(z []vec.Vector) {
-	for i := range z {
-		z[i].ReLU()
+func (r ReLU) Forward(z mat.Matrix) {
+	for i := 0; i < z.ColCount(); i++ {
+		z.Col(i).ReLU()
 	}
 }
 

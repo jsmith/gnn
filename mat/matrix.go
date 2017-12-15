@@ -12,6 +12,11 @@ func (m Matrix) At(i, j int) float64 {
 	return m.cols[j].At(i)
 }
 
+// Set sets the number at the ith row & jth column to the given number
+func (m Matrix) Set(i, j int, f float64) {
+	m.cols[j].Set(i, f)
+}
+
 // ColCount returns the Matrix column count
 func (m Matrix) ColCount() int {
 	return len(m.cols)

@@ -1,20 +1,26 @@
-package gnn
+package data
 
 import (
 	"math/rand"
 
+	"github.com/jacsmith21/gnn/mat"
 	"github.com/jacsmith21/gnn/vec"
 )
 
-// DataSet DataSet
+// DataSet a dataset
 type DataSet struct {
-	data   vec.Matrix
-	labels vec.Vector
+	data   mat.Matrix
+	labels mat.Matrix
 }
 
 // SampleCount SampleCount
 func (d DataSet) SampleCount() int {
 	return d.data.ColCount()
+}
+
+// Sample returns the ith sample
+func (d DataSet) Sample(i int) Sample {
+	return Sample{d.data.Col(i), d.labels.Col(i)}
 }
 
 // Shuffle Shuffle
@@ -27,8 +33,8 @@ func (d DataSet) Shuffle(r vec.Rander) {
 			j = r.Intn(i + 1)
 		}
 
-		d.data.Swap(i, j)
-		d.laels.Swap(i, j)
+		d.data.SwapCols(i, j)
+		d.labels.SwapCols(i, j)
 	}
 }
 
@@ -53,18 +59,8 @@ func (d DataSet) GenerateBatches(batchSize int) []DataSet {
 			to = sampleCount
 		}
 
-		batches[i] = DataSet{copy.data.Slice(from, to), copy.labels.Slice(from, to)}
+		batches[i] = DataSet{mat.Slice(copy.data, from, to), mat.Slice(copy.labels, from, to)}
 	}
 
 	return batches
-}
-
-// Copy Copy
-func Copy(d DataSet) DataSet {
-	data := c.data.Copy()
-	labels := c.labels.Copy()
-	return DataSet{
-		data:   data,
-		labels: labels,
-	}
 }

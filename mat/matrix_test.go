@@ -21,6 +21,12 @@ func TestAt(t *testing.T) {
 	assert.Equal(t, 0., m.At(3, 1))
 }
 
+func TestSet(t *testing.T) {
+	initMatrix()
+	m.Set(0, 0, 500)
+	assert.Equal(t, 500., m.At(0, 0))
+}
+
 func TestColCount(t *testing.T) {
 	initMatrix()
 	assert.Equal(t, 2, m.ColCount())

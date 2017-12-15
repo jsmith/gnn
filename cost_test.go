@@ -3,14 +3,21 @@ package gnn
 import (
 	"testing"
 
+	"github.com/jacsmith21/gnn/mat"
 	"github.com/jacsmith21/gnn/vec"
 	"github.com/stretchr/testify/assert"
 )
 
+var exp mat.Matrix
+var act mat.Matrix
+
+func initCostStuff() {
+	exp = mat.Init(vec.Init(0, 1, 2))
+	act = mat.Init(vec.Init(0, 0, 0))
+}
+
 func TestSECost(t *testing.T) {
 	se := SE{}
-	exp := []vec.Vector{vec.Init([]float64{0, 1, 2})}
-	act := []vec.Vector{vec.Init([]float64{0, 0, 0})}
 	cost := se.Cost(exp, act)
 
 	assert.Equal(t, 1, cost.Len())
@@ -19,8 +26,6 @@ func TestSECost(t *testing.T) {
 
 func TestSEDef(t *testing.T) {
 	mse := SE{}
-	exp := []vec.Vector{vec.Init([]float64{0, 1, 2})}
-	act := []vec.Vector{vec.Init([]float64{0, 0, 0})}
 	cost := mse.Der(exp, act)
 
 	assert.Equal(t, 1, cost.Len())

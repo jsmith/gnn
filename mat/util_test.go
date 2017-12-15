@@ -3,16 +3,22 @@ package mat
 import (
 	"testing"
 
-	"github.com/jacsmith21/gnn/vec"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestInit(t *testing.T) {
-	v1 := vec.Init(0, 1, 2, 3)
-	v2 := vec.Init(0, 1, 2, 3)
-	m := Init(v1, v2)
+	initMatrix()
 
 	assert.Equal(t, 2, m.ColCount())
 	assert.Equal(t, 4, m.Col(0).Len())
 	assert.Equal(t, 2., m.Col(0).At(2))
+}
+
+func TestCopy(t *testing.T) {
+	initMatrix()
+	c := Copy(m)
+	m.Set(0, 0, 500)
+	assert.Equal(t, 2, c.ColCount())
+	assert.Equal(t, 4, c.Col(0).Len())
+	assert.Equal(t, 0., c.At(0, 0))
 }
