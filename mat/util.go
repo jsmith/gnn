@@ -14,11 +14,16 @@ func Make(i, j int) Matrix {
 	return Matrix{vecs}
 }
 
-// Init initilizes a Matrix with given row vectors
-func Init(rows ...vec.Vector) Matrix {
+// InitRows initilizes a Matrix with given row vectors
+func InitRows(rows ...vec.Vector) Matrix {
 	mat := Matrix{rows}
 	mat.Transpose()
 	return mat
+}
+
+// InitCols initilizes a Matrix with given col vectors
+func InitCols(cols ...vec.Vector) Matrix {
+	return Matrix{cols}
 }
 
 // Copy returns a copy of the given Matrix
@@ -36,13 +41,14 @@ func Slice(m Matrix, from, to int) Matrix {
 	return Matrix{m.cols[from:to]}
 }
 
+// Mul performs the matrix multiplication m1 x m2
 func Mul(m1, m2 Matrix) Matrix {
 	res := Make(m1.RowCount(), m2.ColCount())
 	for i := 0; i < m1.RowCount(); i++ {
 		for j := 0; j < m2.ColCount(); j++ {
 			sum := 0.
-			for c := 0; c < m1.ColCount(); c++ {
-				sum += m1.At(i, c) * m2.At(i, j)
+			for index := 0; index < m1.ColCount(); index++ {
+				sum += m1.At(i, index) * m2.At(i, j)
 			}
 
 			res.Set(i, j, sum)

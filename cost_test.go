@@ -12,8 +12,8 @@ var exp mat.Matrix
 var act mat.Matrix
 
 func initCostStuff() {
-	exp = mat.Init(vec.Init(0, 1, 2))
-	act = mat.Init(vec.Init(0, 0, 0))
+	exp = mat.InitCols(vec.Init(0, 1, 2))
+	act = mat.InitCols(vec.Init(0, 0, 0))
 }
 
 func TestSECost(t *testing.T) {

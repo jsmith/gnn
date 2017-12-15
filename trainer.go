@@ -22,7 +22,11 @@ type Trainer struct {
 func (t Trainer) Train(d data.DataSet) {
 	validate := validator.New()
 	if err := validate.Struct(t); err != nil {
-		panic("trainer not set up correctly")
+		panic(err)
+	}
+
+	if t.BatchSize == 0 {
+		t.BatchSize = d.SampleCount()
 	}
 
 	for i := 1; i <= t.Epochs; i++ {

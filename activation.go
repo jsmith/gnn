@@ -8,10 +8,9 @@ import (
 type ReLU struct{}
 
 // Forward Forward
-func (r ReLU) Forward(z mat.Matrix) {
-	for i := 0; i < z.ColCount(); i++ {
-		z.Col(i).ReLU()
-	}
+func (r ReLU) Forward(z mat.Matrix) mat.Matrix {
+	z.ReLU()
+	return z
 }
 
 // Backward Backward
@@ -23,8 +22,9 @@ func (r ReLU) Backward() {
 type Sigmoid struct{}
 
 // Forward Forward
-func (s Sigmoid) Forward(z mat.Matrix) {
-
+func (s Sigmoid) Forward(z mat.Matrix) mat.Matrix {
+	z.Sigmoid()
+	return z
 }
 
 // Backward Backward

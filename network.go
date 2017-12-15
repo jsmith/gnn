@@ -4,7 +4,7 @@ import "github.com/jacsmith21/gnn/mat"
 
 // Layer a layer in a neural network
 type Layer interface {
-	Forward(x mat.Matrix)
+	Forward(x mat.Matrix) mat.Matrix
 	Backward()
 }
 
@@ -13,7 +13,8 @@ type Net []Layer
 
 // Forward Forward
 func (n Net) Forward(input mat.Matrix) {
+	output := input
 	for _, layer := range n {
-		layer.Forward(input)
+		output = layer.Forward(output)
 	}
 }

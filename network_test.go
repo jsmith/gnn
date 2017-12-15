@@ -2,9 +2,6 @@ package gnn
 
 import (
 	"testing"
-
-	"github.com/jacsmith21/gnn/mat"
-	"github.com/jacsmith21/gnn/vec"
 )
 
 var net Net
@@ -19,5 +16,5 @@ func initNet() {
 }
 
 func TestNetForward(t *testing.T) {
-	net.Forward(mat.Init(vec.Init(1, 1)))
+
 }

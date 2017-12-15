@@ -48,9 +48,10 @@ func InitFC(weights mat.Matrix, biases vec.Vector) *FC {
 }
 
 // Forward Forward
-func (f FC) Forward(a mat.Matrix) {
+func (f FC) Forward(a mat.Matrix) mat.Matrix {
 	a = mat.Mul(f.Weights, a)
 	a.AddCol(f.Biases)
+	return a
 }
 
 // Backward Backward

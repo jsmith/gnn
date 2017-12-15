@@ -12,7 +12,7 @@ var m Matrix
 func initMatrix() {
 	v1 := vec.Init(0, 1, 2, 3)
 	v2 := vec.Init(3, 2, 1, 0)
-	m = Init(v1, v2)
+	m = InitRows(v1, v2)
 }
 
 func TestAt(t *testing.T) {

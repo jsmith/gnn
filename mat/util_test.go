@@ -14,12 +14,25 @@ func TestMake(t *testing.T) {
 	assert.Equal(t, 5, mat.ColCount())
 }
 
-func TestInit(t *testing.T) {
-	initMatrix()
+func TestInitCols(t *testing.T) {
+	mat := InitCols(
+		vec.Init(0, 1, 2, 3),
+		vec.Init(3, 2, 1, 0),
+	)
 
-	assert.Equal(t, 2, m.RowCount())
-	assert.Equal(t, 2, m.Col(0).Len())
-	assert.Equal(t, 2., m.At(0, 2))
+	assert.Equal(t, 4, mat.RowCount())
+	assert.Equal(t, 2., mat.At(2, 0))
+}
+
+func TestInitRows(t *testing.T) {
+	mat := InitRows(
+		vec.Init(0, 1, 2, 3),
+		vec.Init(3, 2, 1, 0),
+	)
+
+	assert.Equal(t, 2, mat.RowCount())
+	assert.Equal(t, 2, mat.Col(0).Len())
+	assert.Equal(t, 2., mat.At(0, 2))
 }
 
 func TestCopy(t *testing.T) {
@@ -32,12 +45,12 @@ func TestCopy(t *testing.T) {
 }
 
 func TestMul(t *testing.T) {
-	m1 := Init(
+	m1 := InitRows(
 		vec.Init(0, 1, 1),
 		vec.Init(1, 0, 1),
 	)
 
-	m2 := Init(
+	m2 := InitRows(
 		vec.Init(2, 2),
 		vec.Init(2, 2),
 		vec.Init(2, 2),

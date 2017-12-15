@@ -12,17 +12,12 @@ var xor data.DataSet
 
 func initXORDataSet() {
 	xor = data.Init(
-		mat.Init(
-			vec.Init(0, 0),
-			vec.Init(0, 1),
-			vec.Init(1, 1),
-			vec.Init(1, 0),
+		mat.InitRows(
+			vec.Init(0, 0, 1, 1),
+			vec.Init(0, 1, 1, 0),
 		),
-		mat.Init(
-			vec.Init(0),
-			vec.Init(1),
-			vec.Init(1),
-			vec.Init(0),
+		mat.InitRows(
+			vec.Init(0, 1, 1, 0),
 		),
 	)
 }
