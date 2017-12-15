@@ -1,6 +1,6 @@
 package gnn
 
-import "gonum.org/v1/gonum/mat"
+import "github.com/jacsmith21/gnn/mat"
 
 // Layer a layer in a neural network
 type Layer interface {

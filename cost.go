@@ -16,6 +16,10 @@ type SE struct{}
 
 // Cost Cost
 func (mse SE) Cost(exp, act mat.Matrix) vec.Vector {
+	if exp.ColCount() != act.ColCount() {
+		panic("exp and act column counts must be the same")
+	}
+
 	cost := vec.Make(act.ColCount())
 	for i := 0; i < act.ColCount(); i++ {
 		diff := vec.Sub(act.Col(i), exp.Col(i))

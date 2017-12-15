@@ -2,7 +2,6 @@ package gnn
 
 import (
 	"github.com/jacsmith21/gnn/mat"
-	"github.com/jacsmith21/gnn/vec"
 )
 
 // ReLU ReLU
@@ -24,7 +23,7 @@ func (r ReLU) Backward() {
 type Sigmoid struct{}
 
 // Forward Forward
-func (s Sigmoid) Forward(v []vec.Vector) {
+func (s Sigmoid) Forward(z mat.Matrix) {
 
 }
 

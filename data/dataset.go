@@ -64,3 +64,13 @@ func (d DataSet) GenerateBatches(batchSize int) []DataSet {
 
 	return batches
 }
+
+// Labels returns the DataSet's labels
+func (d DataSet) Labels() mat.Matrix {
+	return d.labels
+}
+
+// Data returns the DataSet's data
+func (d DataSet) Data() mat.Matrix {
+	return d.data
+}

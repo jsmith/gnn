@@ -1,8 +1,9 @@
-package neuron
+package gnn
 
 import (
 	"math"
 
+	"github.com/jacsmith21/gnn/mat"
 	"github.com/jacsmith21/gnn/vec"
 )
 
@@ -30,7 +31,7 @@ func NewFC(in, out int) *FC {
 }
 
 // Forward Forward
-func (f FC) Forward(v []vec.Vector) {
+func (f FC) Forward(a mat.Matrix) {
 	for i := 0; i < f.Out; i++ {
 
 	}

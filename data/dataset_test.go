@@ -65,3 +65,13 @@ func TestGenerateEmptyBatches(t *testing.T) {
 	initDataSet()
 	assert.Panics(t, func() { d.GenerateBatches(0) })
 }
+
+func TestLabels(t *testing.T) {
+	labels := d.Labels()
+	assert.Equal(t, 4, labels.ColCount())
+}
+
+func TestData(t *testing.T) {
+	data := d.Data()
+	assert.Equal(t, 4, data.ColCount())
+}

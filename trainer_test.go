@@ -3,36 +3,37 @@ package gnn
 import (
 	"testing"
 
-	"github.com/jacsmith21/gnn/neuron"
+	"github.com/jacsmith21/gnn/data"
+	"github.com/jacsmith21/gnn/mat"
 	"github.com/jacsmith21/gnn/vec"
 )
 
-var xor DataSet
+var xor data.DataSet
 
 func initXORDataSet() {
-	xor = DataSet{
-		data: []vec.Vector{
-			vec.Init([]float64{0, 0}),
-			vec.Init([]float64{0, 1}),
-			vec.Init([]float64{1, 1}),
-			vec.Init([]float64{1, 0}),
-		},
-		labels: []vec.Vector{
-			vec.Init([]float64{0}),
-			vec.Init([]float64{1}),
-			vec.Init([]float64{1}),
-			vec.Init([]float64{0}),
-		},
-	}
+	xor = data.Init(
+		mat.Init(
+			vec.Init(0, 0),
+			vec.Init(0, 1),
+			vec.Init(1, 1),
+			vec.Init(1, 0),
+		),
+		mat.Init(
+			vec.Init(0),
+			vec.Init(1),
+			vec.Init(1),
+			vec.Init(0),
+		),
+	)
 }
 
 func TestTrainer(t *testing.T) {
 	initXORDataSet()
 
 	net := Net{
-		neuron.NewFC(10, 10),
+		NewFC(10, 10),
 		ReLU{},
-		neuron.NewFC(10, 1),
+		NewFC(10, 1),
 		Sigmoid{},
 	}
 

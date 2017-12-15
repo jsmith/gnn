@@ -17,6 +17,7 @@ func initCostStuff() {
 }
 
 func TestSECost(t *testing.T) {
+	initCostStuff()
 	se := SE{}
 	cost := se.Cost(exp, act)
 
