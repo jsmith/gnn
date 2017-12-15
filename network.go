@@ -12,10 +12,8 @@ type Layer interface {
 type Net []Layer
 
 // Forward Forward
-func (n Net) Forward(input mat.Matrix) mat.Matrix {
+func (n Net) Forward(input mat.Matrix) {
 	for _, layer := range n {
 		layer.Forward(input)
 	}
-
-	return input
 }

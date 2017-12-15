@@ -4,7 +4,7 @@ import (
 	"math/rand"
 
 	"github.com/jacsmith21/gnn/mat"
-	"github.com/jacsmith21/gnn/vec"
+	"github.com/jacsmith21/gnn/rander"
 )
 
 // DataSet a dataset
@@ -24,7 +24,7 @@ func (d DataSet) Sample(i int) Sample {
 }
 
 // Shuffle Shuffle
-func (d DataSet) Shuffle(r vec.Rander) {
+func (d DataSet) Shuffle(r rander.Rander) {
 	for i := d.SampleCount() - 1; i > 0; i-- {
 		var j int
 		if r == nil {

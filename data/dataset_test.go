@@ -4,10 +4,22 @@ import (
 	"testing"
 
 	"github.com/jacsmith21/gnn/mat"
-	"github.com/jacsmith21/gnn/mocks"
 	"github.com/jacsmith21/gnn/vec"
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/mock"
 )
+
+// Rander Rander
+type Rander struct {
+	count int
+	mock.Mock
+}
+
+// Intn Intn
+func (m *Rander) Intn(n int) int {
+	args := m.Called(n)
+	return args.Int(0)
+}
 
 var d DataSet
 
@@ -36,7 +48,7 @@ func TestSampleCount(t *testing.T) {
 func TestShuffle(t *testing.T) {
 	initDataSet()
 
-	rander := new(mocks.Rander)
+	rander := new(Rander)
 	rander.On("Intn", 2).Return(2)
 	rander.On("Intn", 3).Return(3)
 	rander.On("Intn", 4).Return(0)

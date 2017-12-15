@@ -1,8 +1,6 @@
 package gnn
 
 import (
-	"fmt"
-
 	"github.com/go-playground/validator"
 	"github.com/jacsmith21/gnn/data"
 )
@@ -34,10 +32,11 @@ func (t Trainer) Train(d data.DataSet) {
 		}
 
 		for _, batch := range d.GenerateBatches(t.BatchSize) {
-			output := t.Net.Forward(batch.Data())
-			derivative := t.Cost.Der(batch.Labels(), output)
+			input := batch.Data()
+			t.Net.Forward(input)
+			derivative := t.Cost.Der(batch.Labels(), input)
 
-			fmt.Println(derivative)
+			derivative = derivative
 		}
 	}
 }
