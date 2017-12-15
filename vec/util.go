@@ -7,8 +7,8 @@ func Make(size int) Vector {
 }
 
 // Init Init
-func Init(slice []float64) Vector {
-	return Vector{slice}
+func Init(nums ...float64) Vector {
+	return Vector{nums}
 }
 
 // Sub Sub

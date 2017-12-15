@@ -20,8 +20,8 @@ func initDataSet() {
 	y3 := vec.Init([]float64{2})
 	y4 := vec.Init([]float64{3})
 	d = DataSet{
-		data:   []vec.Vector{x1, x2, x3, x4},
-		labels: []vec.Vector{y1, y2, y3, y4},
+		data:   vec.MakeMatrix(x1, x2, x3, x4),
+		labels: vec.MakeMatrix(y1, y2, y3, y4),
 	}
 }
 

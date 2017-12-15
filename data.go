@@ -6,24 +6,15 @@ import (
 	"github.com/jacsmith21/gnn/vec"
 )
 
-// Label Label
-type Label float64
-
-// Sample Sample
-type Sample struct {
-	Input vec.Vector
-	Label Label
-}
-
 // DataSet DataSet
 type DataSet struct {
-	data   []vec.Vector
-	labels []vec.Vector
+	data   vec.Matrix
+	labels vec.Vector
 }
 
 // SampleCount SampleCount
 func (d DataSet) SampleCount() int {
-	return len(d.data)
+	return d.data.ColCount()
 }
 
 // Shuffle Shuffle
@@ -36,8 +27,8 @@ func (d DataSet) Shuffle(r vec.Rander) {
 			j = r.Intn(i + 1)
 		}
 
-		d.data[i], d.data[j] = d.data[j], d.data[i]
-		d.labels[i], d.labels[j] = d.labels[j], d.labels[i]
+		d.data.Swap(i, j)
+		d.laels.Swap(i, j)
 	}
 }
 
@@ -62,7 +53,7 @@ func (d DataSet) GenerateBatches(batchSize int) []DataSet {
 			to = sampleCount
 		}
 
-		batches[i] = DataSet{copy.data[from:to], copy.labels[from:to]}
+		batches[i] = DataSet{copy.data.Slice(from, to), copy.labels.Slice(from, to)}
 	}
 
 	return batches
@@ -70,10 +61,8 @@ func (d DataSet) GenerateBatches(batchSize int) []DataSet {
 
 // Copy Copy
 func Copy(d DataSet) DataSet {
-	data := make([]vec.Vector, len(d.data))
-	labels := make([]vec.Vector, len(d.labels))
-	copy(data, d.data)
-	copy(labels, d.labels)
+	data := c.data.Copy()
+	labels := c.labels.Copy()
 	return DataSet{
 		data:   data,
 		labels: labels,

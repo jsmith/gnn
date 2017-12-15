@@ -12,15 +12,15 @@ func TestMake(t *testing.T) {
 }
 
 func TestInit(t *testing.T) {
-	v := Init([]float64{0, 1, 2, 3, 4})
+	v := Init(0, 1, 2, 3, 4)
 
 	assert.Equal(t, 0., v.At(0))
 	assert.Equal(t, 3., v.At(3))
 }
 
 func TestCreatorSub(t *testing.T) {
-	v1 := Vector{[]float64{0, 1, 2, 3, 4}}
-	v2 := Vector{[]float64{0, 1, 2, 3, 4}}
+	v1 := Init(0, 1, 2, 3, 4)
+	v2 := Init(0, 1, 2, 3, 4)
 	vec := Sub(v1, v2)
 
 	assert.Equal(t, 0., vec.At(0))
@@ -28,7 +28,7 @@ func TestCreatorSub(t *testing.T) {
 }
 
 func TestCopy(t *testing.T) {
-	v1 := Vector{[]float64{0, 1, 2, 3, 4}}
+	v1 := Init(0, 1, 2, 3, 4)
 	v2 := Copy(v1)
 
 	v1.Set(0, 1.)
