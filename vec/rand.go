@@ -10,6 +10,12 @@ const (
 	Gaussian Distribution = iota
 )
 
+// Rander Rander
+type Rander interface {
+	// Intn returns a pseudo-random number in [0,n)
+	Intn(n int) int
+}
+
 // Rand Rand
 func Rand(v Vector, d Distribution) {
 	data := make([]float64, v.Len())

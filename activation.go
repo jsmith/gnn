@@ -6,8 +6,8 @@ import "github.com/jacsmith21/gnn/vec"
 type ReLU struct{}
 
 // Forward Forward
-func (r ReLU) Forward(v vec.Vector) {
-
+func (r ReLU) Forward(v []vec.Vector) []vec.Vector {
+	return nil
 }
 
 // Backward Backward
@@ -19,8 +19,8 @@ func (r ReLU) Backward() {
 type Sigmoid struct{}
 
 // Forward Forward
-func (s Sigmoid) Forward(v vec.Vector) {
-
+func (s Sigmoid) Forward(v []vec.Vector) []vec.Vector {
+	return nil
 }
 
 // Backward Backward

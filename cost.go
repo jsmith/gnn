@@ -4,8 +4,8 @@ import "github.com/jacsmith21/gnn/vec"
 
 // Cost Cost
 type Cost interface {
-	Cost(expected, actual vec.Vector) float64
-	Der(expected, actual vec.Vector) float64
+	Cost(expected, actual []vec.Vector) float64
+	Der(expected, actual []vec.Vector) float64
 }
 
 // SE SE

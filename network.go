@@ -4,7 +4,7 @@ import "github.com/jacsmith21/gnn/vec"
 
 // Layer a layer in a neural network
 type Layer interface {
-	Forward(x vec.Vector)
+	Forward(x []vec.Vector) []vec.Vector
 	Backward()
 }
 

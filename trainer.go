@@ -21,14 +21,17 @@ func (t Trainer) Train(d DataSet) {
 
 		// Shuffle if we're actually doing mini-batch
 		if t.BatchSize < d.SampleCount() {
-			d.Shuffle()
+			d.Shuffle(nil)
 		}
 
-		for _, batch := range d.Batches(t.BatchSize) {
+		for _, batch := range d.GenerateBatches(t.BatchSize) {
+			output := batch.data
 			for _, layer := range t.Net {
-				fmt.Println(batch)
-				fmt.Println(layer)
+				output = layer.Forward(output)
 			}
+
+			derivative := t.Cost.Der(batch.labels, output)
+			fmt.Println(derivative)
 		}
 	}
 }
