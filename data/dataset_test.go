@@ -25,17 +25,14 @@ var d DataSet
 
 func initDataSet() {
 	d = DataSet{
-		data: mat.Init(
+		data: mat.InitCols(
 			vec.Init(0, 0, 0),
 			vec.Init(1, 1, 1),
 			vec.Init(2, 2, 2),
 			vec.Init(3, 3, 3),
 		),
-		labels: mat.Init(
-			vec.Init(0),
-			vec.Init(1),
-			vec.Init(2),
-			vec.Init(3),
+		labels: mat.InitRows(
+			vec.Init(0, 1, 2, 3),
 		),
 	}
 }

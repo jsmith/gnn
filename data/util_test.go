@@ -9,8 +9,8 @@ import (
 )
 
 func TestInit(t *testing.T) {
-	data := mat.Init(vec.Init(1, 2, 3))
-	labels := mat.Init(vec.Init(1, 2, 3))
+	data := mat.InitCols(vec.Init(1, 2, 3))
+	labels := mat.InitCols(vec.Init(1, 2, 3))
 	dataset := Init(data, labels)
 	assert.Equal(t, 1, dataset.labels.ColCount())
 	assert.Equal(t, 1, dataset.data.ColCount())
