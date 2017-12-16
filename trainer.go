@@ -1,8 +1,11 @@
 package gnn
 
 import (
+	"fmt"
+
 	"github.com/go-playground/validator"
 	"github.com/jacsmith21/gnn/data"
+	"github.com/jacsmith21/gnn/log"
 )
 
 // LearningRate LearningRate
@@ -20,6 +23,8 @@ type Trainer struct {
 
 // Train Train
 func (t Trainer) Train(d data.DataSet) {
+	log.Method("Train").Debug("starting")
+
 	validate := validator.New()
 	if err := validate.Struct(t); err != nil {
 		panic(err)
@@ -36,11 +41,10 @@ func (t Trainer) Train(d data.DataSet) {
 		}
 
 		for _, batch := range d.GenerateBatches(t.BatchSize) {
-			input := batch.Data()
-			t.Net.Forward(input)
-			derivative := t.Cost.Der(batch.Labels(), input)
+			output := t.Net.Forward(batch.Data())
+			derivative := t.Cost.Der(batch.Labels(), output)
 
-			derivative = derivative
+			fmt.Print("", derivative)
 		}
 	}
 }

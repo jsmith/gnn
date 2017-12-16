@@ -13,21 +13,23 @@ func (r ReLU) Forward(z mat.Matrix) mat.Matrix {
 	return z
 }
 
-// Backward Backward
-func (r ReLU) Backward() {
-
+// BackProp BackProp
+func (r ReLU) BackProp(dz mat.Matrix) mat.Matrix {
+	dz.ReLUDer()
+	return dz
 }
 
 // Sigmoid Sigmoid
 type Sigmoid struct{}
 
-// Forward Forward
+// Forward applies the sigmoid function to the given matrix and returns the output
 func (s Sigmoid) Forward(z mat.Matrix) mat.Matrix {
 	z.Sigmoid()
 	return z
 }
 
-// Backward Backward
-func (s Sigmoid) Backward() {
-
+// BackProp applies the sigmoid derivative to the given vector and returns the output
+func (s Sigmoid) BackProp(dz mat.Matrix) mat.Matrix {
+	dz.SigmoidDer()
+	return dz
 }

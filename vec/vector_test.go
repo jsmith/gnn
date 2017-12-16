@@ -87,6 +87,13 @@ func TestSigmoid(t *testing.T) {
 	assert.InDelta(t, 0.952574126822, v.At(3), 0.000001)
 }
 
+func TestSigmoidDer(t *testing.T) {
+	initVector()
+	v.SigmoidDer()
+	assert.Equal(t, 0.25, v.At(0))
+	assert.InDelta(t, 0.196611933241481, v.At(1), 0.000001)
+}
+
 func TestSum(t *testing.T) {
 	initVector()
 	f := v.Sum()
@@ -122,5 +129,15 @@ func TestReLU(t *testing.T) {
 	assert.Equal(t, 0., v.At(0))
 	assert.Equal(t, 0., v.At(1))
 	assert.Equal(t, 0., v.At(2))
+	assert.Equal(t, 1., v.At(3))
+}
+
+func TestReLUDer(t *testing.T) {
+	initVector()
+	v.AddScalar(-1)
+	v.ReLUDer()
+	assert.Equal(t, 0., v.At(0))
+	assert.Equal(t, 0., v.At(1))
+	assert.Equal(t, 1., v.At(2))
 	assert.Equal(t, 1., v.At(3))
 }

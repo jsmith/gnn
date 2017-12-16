@@ -7,13 +7,13 @@ import (
 // Layer a layer in a neural network
 type Layer interface {
 	Forward(x mat.Matrix) mat.Matrix
-	Backward()
+	BackProp(partial mat.Matrix) mat.Matrix
 }
 
 // Net a neural network
 type Net []Layer
 
-// Forward Forward
+// Forward forwards the network
 func (n Net) Forward(input mat.Matrix) mat.Matrix {
 	output := input
 	for _, layer := range n {
@@ -21,4 +21,12 @@ func (n Net) Forward(input mat.Matrix) mat.Matrix {
 	}
 
 	return output
+}
+
+// BackProp updates the network parameters given the cost partial
+func (n Net) BackProp(da mat.Matrix) {
+	partial := da
+	for _, layer := range n {
+		partial = layer.Forward(partial)
+	}
 }

@@ -77,10 +77,24 @@ func (m Matrix) Sigmoid() {
 	}
 }
 
+// SigmoidDer applies the sigmoid derivative to each element
+func (m Matrix) SigmoidDer() {
+	for _, c := range m.cols {
+		c.SigmoidDer()
+	}
+}
+
 // ReLU applies the ReLU function to each element
 func (m Matrix) ReLU() {
 	for _, c := range m.cols {
 		c.ReLU()
+	}
+}
+
+// ReLUDer applies the ReLU derivative to each element
+func (m Matrix) ReLUDer() {
+	for _, c := range m.cols {
+		c.ReLUDer()
 	}
 }
 

@@ -10,10 +10,11 @@ import (
 
 // FC FC
 type FC struct {
-	In      int
-	Out     int
-	Weights mat.Matrix
-	Biases  vec.Vector
+	In          int
+	Out         int
+	activations mat.Matrix
+	Weights     mat.Matrix
+	Biases      vec.Vector
 }
 
 // NewFC NewFC
@@ -47,14 +48,15 @@ func InitFC(weights mat.Matrix, biases vec.Vector) *FC {
 	}
 }
 
-// Forward Forward
+// Forward applies the forward operation of a fully connected layer
 func (f FC) Forward(a mat.Matrix) mat.Matrix {
+	f.activations = mat.Copy(a) // caching for back propogation
 	a = mat.Mul(f.Weights, a)
 	a.AddCol(f.Biases)
 	return a
 }
 
-// Backward Backward
-func (f FC) Backward() {
-
+// BackProp applies the backward operation of a fully connected layer
+func (f FC) BackProp(da mat.Matrix) mat.Matrix {
+	return mat.Make(0, 0)
 }

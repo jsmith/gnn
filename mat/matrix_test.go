@@ -91,10 +91,38 @@ func TestRelu(t *testing.T) {
 	assert.Equal(t, 1., m.At(0, 1))
 }
 
+func TestReluDer(t *testing.T) {
+	initMatrix()
+	m.Set(0, 0, -1)
+	m.ReLUDer()
+
+	assert.Equal(t, 0., m.At(0, 0))
+	assert.Equal(t, 1., m.At(0, 1))
+	assert.Equal(t, 1., m.At(0, 2))
+}
+
 func TestSigmoid(t *testing.T) {
 	initMatrix()
 	m.Sigmoid()
 
 	assert.Equal(t, 0.5, m.At(0, 0))
 	assert.InDelta(t, 0.731058578630004, m.At(0, 1), 0.00000001)
+}
+
+func TestSigmoidDer(t *testing.T) {
+	initMatrix()
+	m.SigmoidDer()
+
+	assert.Equal(t, 0.25, m.At(0, 0))
+	assert.InDelta(t, 0.196611933241481, m.At(0, 1), 0.00000001)
+}
+
+func TestString(t *testing.T) {
+	mat := InitRows(
+		vec.Init(1, 5),
+		vec.Init(1, 4),
+	)
+
+	str := mat.String()
+	assert.Equal(t, str, "[ 1 5 ]\n[ 1 4 ]\n")
 }

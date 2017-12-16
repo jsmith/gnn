@@ -7,13 +7,13 @@ import (
 	"github.com/jacsmith21/gnn/rander"
 )
 
-// DataSet a dataset
+// DataSet is a dataset
 type DataSet struct {
 	data   mat.Matrix
 	labels mat.Matrix
 }
 
-// SampleCount SampleCount
+// SampleCount returns the sample count of a DataSet
 func (d DataSet) SampleCount() int {
 	return d.data.ColCount()
 }
@@ -23,7 +23,7 @@ func (d DataSet) Sample(i int) Sample {
 	return Sample{d.data.Col(i), d.labels.Col(i)}
 }
 
-// Shuffle Shuffle
+// Shuffle shuffles the samples into a random order
 func (d DataSet) Shuffle(r rander.Rander) {
 	for i := d.SampleCount() - 1; i > 0; i-- {
 		var j int
@@ -38,7 +38,7 @@ func (d DataSet) Shuffle(r rander.Rander) {
 	}
 }
 
-// GenerateBatches GenerateBatches
+// GenerateBatches generates a set of batches with the given batch size
 func (d DataSet) GenerateBatches(batchSize int) []DataSet {
 	if batchSize == 0 {
 		panic("batch size cannot be 0")

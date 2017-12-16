@@ -23,13 +23,28 @@ func initXORDataSet() {
 	)
 }
 
+func TestBadTrainer(t *testing.T) {
+	net := Net{
+		NewFC(1, 1),
+		ReLU{},
+	}
+
+	trainer := Trainer{
+		Net:    net,
+		Cost:   SE{},
+		Epochs: 500,
+	}
+
+	assert.Panics(t, func() { trainer.Train(xor) })
+}
+
 func TestTrainer(t *testing.T) {
 	initXORDataSet()
 
 	net := Net{
-		NewFC(10, 10),
+		NewFC(2, 4),
 		ReLU{},
-		NewFC(10, 1),
+		NewFC(4, 1),
 		Sigmoid{},
 	}
 
@@ -41,6 +56,6 @@ func TestTrainer(t *testing.T) {
 		BatchSize:    4,
 	}
 
-	//trainer.Train(xor)
+	trainer.Train(xor)
 	assert.Equal(t, trainer, trainer)
 }
