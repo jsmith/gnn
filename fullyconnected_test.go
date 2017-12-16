@@ -46,9 +46,9 @@ func TestFullyConnectedBackProp(t *testing.T) {
 		vec.Init(1),
 	))
 
-	assert.Equal(t, 0.99, fc.Weights.At(0, 0))
-	assert.Equal(t, 1.99, fc.Weights.At(1, 1))
-	assert.Equal(t, 0.99, fc.Biases.At(0))
+	assert.Equal(t, 0.9, fc.Weights.At(0, 0))
+	assert.Equal(t, 1.9, fc.Weights.At(1, 1))
+	assert.Equal(t, 0.9, fc.Biases.At(0))
 }
 
 
