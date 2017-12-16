@@ -2,39 +2,27 @@ package gnn
 
 import (
 	"github.com/jacsmith21/gnn/mat"
-	"github.com/jacsmith21/gnn/vec"
 )
 
-// Cost Cost
+// Cost is the cost interface
 type Cost interface {
-	Cost(exp, act mat.Matrix) vec.Vector
-	Der(exp, act mat.Matrix) vec.Vector
+	Cost(exp, act mat.Matrix) mat.Matrix
+	Der(exp, act mat.Matrix) mat.Matrix
 }
 
-// SE SE
+// SE is the squared error struct
 type SE struct{}
 
-// Cost Cost
-func (mse SE) Cost(exp, act mat.Matrix) vec.Vector {
-	if exp.ColCount() != act.ColCount() {
-		panic("exp and act column counts must be the same")
-	}
-
-	cost := vec.Make(act.ColCount())
-	for i := 0; i < act.ColCount(); i++ {
-		diff := vec.Sub(act.Col(i), exp.Col(i))
-		diff.Pow(2)
-		cost.Set(i, diff.Sum())
-	}
-	return cost
+// Cost computes the squared error cost
+func (s SE) Cost(exp, act mat.Matrix) mat.Matrix {
+	diff := mat.Sub(act, exp)
+	diff.Pow(2)
+	return diff
 }
 
-// Der Der
-func (mse SE) Der(exp, act mat.Matrix) vec.Vector {
-	der := vec.Make(act.ColCount())
-	for i := 0; i < act.ColCount(); i++ {
-		diff := vec.Sub(act.Col(i), exp.Col(i))
-		der.Set(i, diff.Sum()*2)
-	}
-	return der
+// Der computes the squared error derivatives
+func (s SE) Der(exp, act mat.Matrix) mat.Matrix {
+	diff := mat.Sub(act, exp)
+	diff.Scale(2)
+	return diff
 }

@@ -98,6 +98,27 @@ func (m Matrix) ReLUDer() {
 	}
 }
 
+// Mul does the element wise multiplication with the given matrix
+func (m Matrix) Mul(other Matrix) {
+	for i, c := range other.cols {
+		m.Col(i).Mul(c)
+	}
+}
+
+// Pow applies the power operation to each element
+func (m Matrix) Pow(f float64) {
+	for i := range m.cols {
+		m.Col(i).Pow(f)
+	}
+}
+
+// Sub does the element wise subtraction with the given matrix
+func (m Matrix) Sub(other Matrix) {
+	for i, c := range other.cols {
+		m.Col(i).Sub(c)
+	}
+}
+
 func (m Matrix) String() string {
 	str := ""
 	for i := 0; i < m.RowCount(); i++ {

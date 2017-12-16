@@ -63,3 +63,23 @@ func Mul(m1, m2 Matrix) Matrix {
 
 	return res
 }
+
+// SumCols sums the columns of the given matrix and returns the sum vector
+func SumCols(m Matrix) vec.Vector {
+	sums := vec.Make(m.RowCount())
+	for i := 0; i < m.RowCount(); i++ {
+		sum := 0.
+		for j := 0; j < m.ColCount(); j++ {
+			sum += m.At(i, j)
+		}
+		sums.Set(i, sum)
+	}
+	return sums
+}
+
+// Sub subtracts the two matrices and returns the result
+func Sub(m1, m2 Matrix) Matrix {
+	copy := Copy(m1)
+	copy.Sub(m2)
+	return copy
+}

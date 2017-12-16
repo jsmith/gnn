@@ -10,9 +10,10 @@ import (
 var m Matrix
 
 func initMatrix() {
-	v1 := vec.Init(0, 1, 2, 3)
-	v2 := vec.Init(3, 2, 1, 0)
-	m = InitRows(v1, v2)
+	m = InitRows(
+		vec.Init(0, 1, 2, 3),
+		vec.Init(3, 2, 1, 0),
+	)
 }
 
 func TestAt(t *testing.T) {
@@ -118,6 +119,7 @@ func TestSigmoidDer(t *testing.T) {
 }
 
 func TestString(t *testing.T) {
+	initMatrix()
 	mat := InitRows(
 		vec.Init(1, 5),
 		vec.Init(1, 4),
@@ -125,4 +127,37 @@ func TestString(t *testing.T) {
 
 	str := mat.String()
 	assert.Equal(t, str, "[ 1 5 ]\n[ 1 4 ]\n")
+}
+
+func TestMul(t *testing.T) {
+	initMatrix()
+	m2 := InitRows(
+		vec.Init(1, 1, 0, 0),
+		vec.Init(1, 1, 0, 0),
+	)
+	m.Mul(m2)
+
+	assert.Equal(t, 1., m.At(0, 1))
+	assert.Equal(t, 0., m.At(0, 2))
+	assert.Equal(t, 0., m.At(1, 2))
+}
+
+func TestSub(t *testing.T) {
+	initMatrix()
+	m2 := InitRows(
+		vec.Init(1, 1, 0, 0),
+		vec.Init(1, 1, 0, 0),
+	)
+	m.Sub(m2)
+
+	assert.Equal(t, -1., m.At(0, 0))
+	assert.Equal(t, 2., m.At(1, 0))
+}
+
+func TestPow(t *testing.T) {
+	initMatrix()
+	m.Pow(2)
+
+	assert.Equal(t, 0., m.At(0, 0))
+	assert.Equal(t, 9., m.At(1, 0))
 }

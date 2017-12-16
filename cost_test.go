@@ -21,14 +21,16 @@ func TestSECost(t *testing.T) {
 	se := SE{}
 	cost := se.Cost(exp, act)
 
-	assert.Equal(t, 1, cost.Len())
-	assert.Equal(t, (0. + 1. + 4.), cost.At(0))
+	assert.Equal(t, 1, cost.ColCount())
+	assert.Equal(t, 0., cost.At(0, 0))
+	assert.Equal(t, 4., cost.At(2, 0))
 }
 
 func TestSEDef(t *testing.T) {
 	mse := SE{}
 	cost := mse.Der(exp, act)
 
-	assert.Equal(t, 1, cost.Len())
-	assert.Equal(t, -(0.+1.+2.)*2, cost.At(0))
+	assert.Equal(t, 1, cost.ColCount())
+	assert.Equal(t, 0., cost.At(0, 0))
+	assert.Equal(t, -4., cost.At(2, 0))
 }
