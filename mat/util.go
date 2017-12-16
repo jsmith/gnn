@@ -46,7 +46,7 @@ func Slice(m Matrix, from, to int) Matrix {
 // Mul performs the matrix multiplication m1 x m2
 func Mul(m1, m2 Matrix) Matrix {
 	if m1.ColCount() != m2.RowCount() {
-		panic(fmt.Sprintf("m1 column count does not match m2 row count: %v vs. %v", m2.ColCount(), m2.RowCount()))
+		panic(fmt.Sprintf("m1 column count does not match m2 row count: %v vs. %v", m1.ColCount(), m2.RowCount()))
 	}
 
 	res := Make(m1.RowCount(), m2.ColCount())
@@ -81,5 +81,12 @@ func SumCols(m Matrix) vec.Vector {
 func Sub(m1, m2 Matrix) Matrix {
 	copy := Copy(m1)
 	copy.Sub(m2)
+	return copy
+}
+
+// Transpose copies and transposes the given matrix
+func Transpose(m Matrix) Matrix {
+	copy := Copy(m)
+	copy.Transpose()
 	return copy
 }

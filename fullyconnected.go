@@ -42,21 +42,23 @@ func InitFC(weights mat.Matrix, biases vec.Vector) *FullyConnected {
 }
 
 // Forward applies the forward operation of a fully connected layer
-func (f FullyConnected) Forward(a mat.Matrix) mat.Matrix {
-	f.activations = mat.Copy(a) // caching for back propogation
+func (f *FullyConnected) Forward(a mat.Matrix) mat.Matrix {
+	f.activations = mat.Copy(a) // caching for backpropogation
+	f.sampleCount = f.activations.ColCount()
 	a = mat.Mul(f.Weights, a)
 	a.AddCol(f.Biases)
 	return a
 }
 
-// BackProp applies the backward operation of a fully connected layer
-func (f FullyConnected) BackProp(t Trainer, dz mat.Matrix) mat.Matrix {
-	da := mat.Mul(dz, f.Weights)
+// BackProp applies the backpropogation operation of a fully connected layer and updates its parameters
+func (f *FullyConnected) BackProp(t Trainer, dz mat.Matrix) mat.Matrix {
+	weights := mat.Transpose(f.Weights)
+	da := mat.Mul(weights, dz)
 	f.updateParams(t, dz)
 	return da
 }
 
-func (f FullyConnected) updateParams(t Trainer, dz mat.Matrix) {
+func (f *FullyConnected) updateParams(t Trainer, dz mat.Matrix) {
 	f.activations.Transpose()
 	dw := mat.Mul(dz, f.activations)
 	db := mat.SumCols(dz)
@@ -64,6 +66,7 @@ func (f FullyConnected) updateParams(t Trainer, dz mat.Matrix) {
 	scale := (1. / float64(f.sampleCount)) * float64(t.LearningRate)
 	dw.Scale(scale)
 	db.Scale(scale)
+
 	f.Weights.Sub(dw)
 	f.Biases.Sub(db)
 }

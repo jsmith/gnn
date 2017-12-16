@@ -81,3 +81,12 @@ func TestSubTwoMatrices(t *testing.T) {
 	assert.Equal(t, 2., m2.At(1, 0))
 }
 
+func TestUtilTranspose(t *testing.T) {
+	initMatrix()
+	trans := Transpose(m)
+
+	assert.Equal(t, 4, trans.RowCount())
+	assert.Equal(t, 2, trans.ColCount())
+	assert.Equal(t, 2, m.RowCount())
+	assert.Equal(t, 4, m.ColCount())
+}

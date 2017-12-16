@@ -83,7 +83,7 @@ func TestAddCol(t *testing.T) {
 	assert.Equal(t, 2., m.At(1, 3))
 }
 
-func TestRelu(t *testing.T) {
+func TestReLU(t *testing.T) {
 	initMatrix()
 	m.Set(0, 0, -1)
 	m.ReLU()
@@ -92,7 +92,7 @@ func TestRelu(t *testing.T) {
 	assert.Equal(t, 1., m.At(0, 1))
 }
 
-func TestReluDer(t *testing.T) {
+func TestReLUDer(t *testing.T) {
 	initMatrix()
 	m.Set(0, 0, -1)
 	m.ReLUDer()
