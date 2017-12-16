@@ -85,7 +85,14 @@ func (m Matrix) ReLU() {
 }
 
 func (m Matrix) String() string {
-	c := Copy(m)
-	c.Transpose()
-	return fmt.Sprintf("%+v", c)
+	str := ""
+	for i := 0; i < m.RowCount(); i++ {
+		str += "[ "
+		for _, c := range m.cols {
+			str += fmt.Sprintf("%v ", c.At(i))
+		}
+		str += "]\n"
+	}
+
+	return str
 }

@@ -45,13 +45,16 @@ func Slice(m Matrix, from, to int) Matrix {
 
 // Mul performs the matrix multiplication m1 x m2
 func Mul(m1, m2 Matrix) Matrix {
-	fmt.Println(m1)
+	if m1.ColCount() != m2.RowCount() {
+		panic(fmt.Sprintf("m1 column count does not match m2 row count: %v vs. %v", m2.ColCount(), m2.RowCount()))
+	}
+
 	res := Make(m1.RowCount(), m2.ColCount())
 	for i := 0; i < m1.RowCount(); i++ {
 		for j := 0; j < m2.ColCount(); j++ {
 			sum := 0.
 			for index := 0; index < m1.ColCount(); index++ {
-				sum += m1.At(i, index) * m2.At(i, j)
+				sum += m1.At(i, index) * m2.At(index, j)
 			}
 
 			res.Set(i, j, sum)

@@ -1,6 +1,7 @@
 package vec
 
 import (
+	"fmt"
 	"math"
 )
 
@@ -113,4 +114,9 @@ func (v Vector) ReLU() {
 	for i, n := range v.slice {
 		v.slice[i] = math.Max(n, 0)
 	}
+}
+
+// String returns a string representation of the Vector
+func (v Vector) String() string {
+	return fmt.Sprintf("%v", v.slice)
 }

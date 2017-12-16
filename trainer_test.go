@@ -6,6 +6,7 @@ import (
 	"github.com/jacsmith21/gnn/data"
 	"github.com/jacsmith21/gnn/mat"
 	"github.com/jacsmith21/gnn/vec"
+	"github.com/stretchr/testify/assert"
 )
 
 var xor data.DataSet
@@ -40,6 +41,6 @@ func TestTrainer(t *testing.T) {
 		BatchSize:    4,
 	}
 
-	trainer.Train(xor)
-
+	//trainer.Train(xor)
+	assert.Equal(t, trainer, trainer)
 }
