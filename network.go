@@ -24,9 +24,8 @@ func (n Net) Forward(input mat.Matrix) mat.Matrix {
 }
 
 // BackProp updates the network parameters given the cost partial
-func (n Net) BackProp(t Trainer, da mat.Matrix) {
-	partial := da
-	for _, layer := range n {
-		partial = layer.BackProp(t, partial)
+func (n Net) BackProp(t Trainer, partial mat.Matrix) {
+	for i := len(n)-1; i >= 0; i-- {
+		partial = n[i].BackProp(t, partial)
 	}
 }

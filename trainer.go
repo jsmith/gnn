@@ -4,6 +4,7 @@ import (
 	"github.com/go-playground/validator"
 	"github.com/jacsmith21/gnn/data"
 	"github.com/jacsmith21/gnn/log"
+	"github.com/jacsmith21/gnn/mat"
 )
 
 // LearningRate LearningRate
@@ -21,8 +22,6 @@ type Trainer struct {
 
 // Train Train
 func (t Trainer) Train(d data.DataSet) {
-	log.Method("Train").Debug("starting")
-
 	validate := validator.New()
 	if err := validate.Struct(t); err != nil {
 		panic(err)
@@ -35,14 +34,18 @@ func (t Trainer) Train(d data.DataSet) {
 	for i := 1; i <= t.Epochs; i++ {
 		// Shuffle if we're actually doing mini-batch
 		if t.BatchSize < d.SampleCount() {
+			log.Method("Train").Debug("shuffling DataSet")
 			d.Shuffle(nil)
 		}
 
 		for _, batch := range d.GenerateBatches(t.BatchSize) {
 			output := t.Net.Forward(batch.Data())
 			da := t.Cost.Der(batch.Labels(), output)
-			da = da
-			//t.Net.BackProp(t, da)
+			t.Net.BackProp(t, da)
 		}
 	}
+}
+
+func (t Trainer) Predict(m mat.Matrix) mat.Matrix {
+	return t.Net.Forward(m)
 }

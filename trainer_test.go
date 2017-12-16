@@ -41,18 +41,31 @@ func TestBadTrainer(t *testing.T) {
 var trainer Trainer
 
 func initDefaultTrainer() {
+	weights1 := mat.InitRows(
+		vec.Init(0.1, -0.1),
+		vec.Init(0.2, -0.4),
+		vec.Init(0.05, -0.2),
+		vec.Init(0.4, -0.05),
+	)
+	biases1 := vec.Make(4)
+
+	weights2 := mat.InitRows(
+		vec.Init(0.1, -0.1, 0.05, -0.05),
+	)
+	biases2 := vec.Make(1)
+
 	net := Net{
-		NewFC(2, 4),
+		InitFC(weights1, biases1),
 		&ReLU{},
-		NewFC(4, 1),
+		InitFC(weights2, biases2),
 		&Sigmoid{},
 	}
 
 	trainer = Trainer{
 		Net:          net,
 		Cost:         SE{},
-		LearningRate: 0.01,
-		Epochs:       100,
+		LearningRate: 0.1,
+		Epochs:       10000,
 		BatchSize:    4,
 	}
 }
@@ -61,5 +74,9 @@ func TestTrainer(t *testing.T) {
 	initXORDataSet()
 	initDefaultTrainer()
 	trainer.Train(xor)
-	assert.Equal(t, trainer, trainer)
+	predictions := trainer.Predict(xor.Data())
+	expected := mat.InitRows(
+		vec.Init(0.010810160797699253, 0.9736054703566581, 0.9736054703566581, 0.009612902402324593),
+	)
+	assert.Equal(t, expected, predictions)
 }
