@@ -31,9 +31,9 @@ func initNet() {
 
 	net = Net{
 		InitFC(weights, biases),
-		ReLU{},
+		&ReLU{},
 		InitFC(weights, biases),
-		Sigmoid{},
+		&Sigmoid{},
 	}
 }
 
