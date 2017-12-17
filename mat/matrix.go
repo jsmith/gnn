@@ -150,6 +150,11 @@ func (m *Matrix) Append(v vec.Vector, axis int) {
 		panic("bad axis")
 	}
 }
-func (m Matrix) Row(i int) interface{} {
+func (m Matrix) Row(i int) vec.Vector {
 	row := vec.Make(m.ColCount())
+	for j := range m.cols {
+		row.Set(j, m.At(i, j))
+	}
+
+	return row
 }

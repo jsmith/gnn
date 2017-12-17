@@ -36,11 +36,12 @@ func TestOneHot(t *testing.T) {
 		vec.Init(1, 2, 3),
 		vec.Init(2, 1, 2),
 	)
+	hot := OneHot(m)
 	assert.Equal(t, mat.InitRows(
 		vec.Init(1, 0, 0),
 		vec.Init(0, 1, 0),
 		vec.Init(0, 0, 1),
 		vec.Init(1, 0, 1),
 		vec.Init(0, 1, 0),
-	), OneHot(m))
+	), hot)
 }

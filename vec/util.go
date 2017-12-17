@@ -34,18 +34,11 @@ func Slice(v Vector, from, to int) Vector {
 
 // Unique returns a new vector containing only the unique elements of the given vector
 func Unique(v Vector) Vector {
-	values := make(map[float64]bool)
-	for i := 0; i < v.Len(); i++ {
-		if !values[v.At(i)] {
-			values[v.At(i)] = true
+	unique := Make(0)
+	for i := range v.slice {
+		if !unique.Contains(v.At(i)) {
+			unique.Append(v.At(i))
 		}
-	}
-
-	unique := Make(len(values))
-	i := 0
-	for value := range values {
-		unique.Set(i, value)
-		i++
 	}
 
 	return unique

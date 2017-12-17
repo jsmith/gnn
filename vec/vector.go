@@ -155,3 +155,24 @@ func (v Vector) Index(value float64) int {
 func (v *Vector) Append(f float64) {
 	v.slice = append(v.slice, f)
 }
+
+// Contains returns whether or not the vector contains the given value
+func (v Vector) Contains(f float64) bool {
+	for _, n := range v.slice {
+		if n == f {
+			return true
+		}
+	}
+
+	return false
+}
+func (v Vector) Indices(value float64) []int {
+	indices := make([]int, 0)
+	for i, f := range v.slice {
+		if f == value {
+			indices = append(indices, i)
+		}
+	}
+
+	return indices
+}

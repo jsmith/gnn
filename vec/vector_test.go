@@ -149,3 +149,9 @@ func TestAppend(t *testing.T) {
 	v.Append(1)
 	assert.Equal(t, Init(0, 1, 2, 3, 4, 1), v)
 }
+
+func TestContains(t *testing.T) {
+	initVector()
+	assert.Equal(t, false, v.Contains(-1))
+	assert.Equal(t, true, v.Contains(3))
+}

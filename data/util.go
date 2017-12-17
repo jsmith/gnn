@@ -3,10 +3,6 @@ package data
 import (
 	"github.com/jacsmith21/gnn/mat"
 	"github.com/jacsmith21/gnn/vec"
-	"os"
-	"encoding/csv"
-	"bufio"
-	"io"
 )
 
 // Init initializes a data set with the given data and labels
@@ -28,16 +24,18 @@ func Copy(d DataSet) DataSet {
 func OneHot(m mat.Matrix) mat.Matrix {
 	hot := mat.Make(0,m.ColCount())
 	for i := 0; i < m.RowCount(); i++ {
-		col := m.Row(i)
-		unique := vec.Unique(col)
-		cols := mat.Make(unique.Len(), col.Len())
-		for j := 0; j < col.Len(); j++ {
-			index := unique.Index(col.At(i))
-			cols.Set(index, i, 1)
+		row := m.Row(i)
+		unique := vec.Unique(row)
+		rows := mat.Make(unique.Len(), row.Len())
+		for k := 0; k < unique.Len(); k++ {
+			indices := row.Indices(unique.At(k))
+			for j := 0; j < len(indices); j++ {
+				rows.Set(k, indices[j], 1)
+			}
 		}
 
-		for j := 0; j < cols.ColCount(); j++ {
-			hot.Append(cols.Col(i), 1)
+		for j := 0; j < rows.RowCount(); j++ {
+			hot.Append(rows.Row(j), 1)
 		}
 	}
 
