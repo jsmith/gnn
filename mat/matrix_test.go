@@ -161,3 +161,23 @@ func TestPow(t *testing.T) {
 	assert.Equal(t, 0., m.At(0, 0))
 	assert.Equal(t, 9., m.At(1, 0))
 }
+
+func TestAppend(t *testing.T) {
+	m := InitRows(
+		vec.Init(1, 1),
+	)
+
+	m.Append(vec.Init(2, 2), 1)
+	assert.Equal(t, InitRows(
+		vec.Init(1, 1),
+		vec.Init(2, 2),
+	), m)
+
+	m.Append(vec.Init(3, 3), 2)
+	assert.Equal(t, InitRows(
+		vec.Init(1, 1, 3),
+		vec.Init(2, 2, 3),
+	), m)
+
+	assert.Panics(t, func() { m.Append(vec.Make(2), 3)})
+}

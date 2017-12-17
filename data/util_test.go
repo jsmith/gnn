@@ -30,3 +30,17 @@ func TestCopy(t *testing.T) {
 	assert.Equal(t, 3, c.data.Col(0).Len())
 	assert.Equal(t, 0., c.data.Col(0).At(0))
 }
+
+func TestOneHot(t *testing.T) {
+	m := mat.InitRows(
+		vec.Init(1, 2, 3),
+		vec.Init(2, 1, 2),
+	)
+	assert.Equal(t, mat.InitRows(
+		vec.Init(1, 0, 0),
+		vec.Init(0, 1, 0),
+		vec.Init(0, 0, 1),
+		vec.Init(1, 0, 1),
+		vec.Init(0, 1, 0),
+	), OneHot(m))
+}

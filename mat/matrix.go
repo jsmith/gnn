@@ -131,3 +131,25 @@ func (m Matrix) String() string {
 
 	return str
 }
+func (m *Matrix) Append(v vec.Vector, axis int) {
+	if axis == 1 {
+		if v.Len() != m.ColCount() {
+			panic("vector length should equal amount of columns")
+		}
+
+		for j := range m.cols {
+			m.cols[j].Append(v.At(j))
+		}
+	} else if axis == 2 {
+		if v.Len() != m.RowCount() {
+			panic("vector length should equal amount of rows")
+		}
+
+		m.cols = append(m.cols, v)
+	} else {
+		panic("bad axis")
+	}
+}
+func (m Matrix) Row(i int) interface{} {
+	row := vec.Make(m.ColCount())
+}

@@ -43,3 +43,9 @@ func TestSlice(t *testing.T) {
 	assert.Equal(t, 0., v.At(0))
 	assert.Equal(t, 1., v.At(1))
 }
+
+func TestUnique(t *testing.T) {
+	v := Init(1, 1, 2, 3, 3)
+	unique := Unique(v)
+	assert.Equal(t, unique, Init(1, 2, 3))
+}

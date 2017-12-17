@@ -6,7 +6,7 @@ import (
 	"github.com/jacsmith21/gnn/vec"
 )
 
-// Make initilizes a matrix with i rows and j cols
+// Make initializes a matrix with i rows and j cols
 func Make(i, j int) Matrix {
 	vecs := make([]vec.Vector, j)
 	for k := 0; k < j; k++ {
@@ -16,14 +16,14 @@ func Make(i, j int) Matrix {
 	return Matrix{vecs}
 }
 
-// InitRows initilizes a Matrix with given row vectors
+// InitRows initializes a Matrix with given row vectors
 func InitRows(rows ...vec.Vector) Matrix {
 	mat := Matrix{rows}
 	mat.Transpose()
 	return mat
 }
 
-// InitCols initilizes a Matrix with given col vectors
+// InitCols initializes a Matrix with given col vectors
 func InitCols(cols ...vec.Vector) Matrix {
 	return Matrix{cols}
 }

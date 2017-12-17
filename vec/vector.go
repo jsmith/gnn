@@ -139,3 +139,19 @@ func (v Vector) ReLUDer() {
 func (v Vector) String() string {
 	return fmt.Sprintf("%v", v.slice)
 }
+
+// Index returns the first index of the given float, otherwise -1
+func (v Vector) Index(value float64) int {
+	for i, f := range v.slice {
+		if f == value {
+			return i
+		}
+	}
+
+	return -1
+}
+
+// Append appends the given float to the vector
+func (v *Vector) Append(f float64) {
+	v.slice = append(v.slice, f)
+}

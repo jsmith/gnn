@@ -136,8 +136,16 @@ func TestReLUDer(t *testing.T) {
 	initVector()
 	v.AddScalar(-1)
 	v.ReLUDer()
-	assert.Equal(t, 0., v.At(0))
-	assert.Equal(t, 0., v.At(1))
-	assert.Equal(t, 1., v.At(2))
-	assert.Equal(t, 1., v.At(3))
+	assert.Equal(t, Init(0, 0, 1, 1, 1), v)
+}
+
+func TestIndex(t *testing.T) {
+	initVector()
+	assert.Equal(t, 3, v.Index(3))
+}
+
+func TestAppend(t *testing.T) {
+	initVector()
+	v.Append(1)
+	assert.Equal(t, Init(0, 1, 2, 3, 4, 1), v)
 }

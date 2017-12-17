@@ -3,7 +3,7 @@ package gnn
 import (
 	"github.com/go-playground/validator"
 	"github.com/jacsmith21/gnn/data"
-	"github.com/jacsmith21/gnn/log"
+	"github.com/jacsmith21/gnn/ext/log"
 	"github.com/jacsmith21/gnn/mat"
 )
 
