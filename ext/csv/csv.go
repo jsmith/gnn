@@ -2,20 +2,36 @@ package csv
 
 import (
 	"encoding/csv"
-	"bufio"
 	"io"
-	"os"
+	"strings"
 )
 
-// Read returns a string matrix with the contents of the given csv file
-func Read(file *os.File) [][]string {
-	reader := csv.NewReader(bufio.NewReader(file))
+// Read returns a string matrix with the contents of the given csv file and ignores lines that contain the given values
+func Read(bytes []byte, ignore ...string) [][]string {
+	m := make(map[string]bool)
+	for _, value := range ignore {
+		m[value] = true
+	}
+
+	r := csv.NewReader(strings.NewReader(string(bytes)))
 	var data [][]string
 	for {
-		line, err := reader.Read()
+		line, err := r.Read()
 		if err == io.EOF {
 			break
 		}
+
+		foundIgnore := false
+		for _, item := range line {
+			if m[item] {
+				foundIgnore = true
+				break
+			}
+		}
+		if foundIgnore {
+			continue
+		}
+
 		data = append(data, line)
 	}
 

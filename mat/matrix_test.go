@@ -179,10 +179,19 @@ func TestAppend(t *testing.T) {
 		vec.Init(2, 2, 3),
 	), m)
 
-	assert.Panics(t, func() { m.Append(vec.Make(2), 3)})
+	assert.Panics(t, func() { m.Append(vec.Make(2), 3) })
 }
 
 func TestRow(t *testing.T) {
 	initMatrix()
 	assert.Equal(t, vec.Init(3, 2, 1, 0), m.Row(1))
+}
+
+func TestDrop(t *testing.T) {
+	initMatrix()
+	m.Drop(0, 2)
+	m.Drop(2, 1)
+	assert.Equal(t, InitRows(
+		vec.Init(3, 2, 0),
+	), m)
 }

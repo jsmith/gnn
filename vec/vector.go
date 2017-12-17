@@ -176,3 +176,12 @@ func (v Vector) Indices(value float64) []int {
 
 	return indices
 }
+func (v *Vector) Remove(index int) {
+	v.slice = append(v.slice[:index], v.slice[index+1:]...)
+}
+
+func (v Vector) Softmax() {
+	v.Exp()
+	sum := v.Sum()
+	v.Scale(1. / sum)
+}

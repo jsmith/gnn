@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/jacsmith21/gnn/vec"
+	"strconv"
 )
 
 // Make initializes a matrix with i rows and j cols
@@ -89,4 +90,25 @@ func Transpose(m Matrix) Matrix {
 	copy := Copy(m)
 	copy.Transpose()
 	return copy
+}
+
+// InitFromStringArray initilizes an array from a 2D array of strings
+func InitFromStringArray(s [][]string) Matrix {
+	if len(s) == 0 {
+		return Make(0, 0)
+	}
+
+	m := Make(len(s), len(s[0]))
+	for i := 0; i < m.RowCount(); i++ {
+		for j := 0; j < m.ColCount(); j++ {
+			f, err := strconv.ParseFloat(s[i][j], 64)
+			if err != nil {
+				panic(fmt.Sprintf("cannot convert %v to a float", s[i][j]))
+			}
+
+			m.Set(i, j, f)
+		}
+	}
+
+	return m
 }

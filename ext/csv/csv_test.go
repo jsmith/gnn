@@ -2,17 +2,12 @@ package csv
 
 import (
 	"testing"
-	"os"
+
 	"github.com/stretchr/testify/assert"
 )
 
 func TestRead(t *testing.T) {
-	file, err := os.Open("test.csv") // just pass the file name
-	if err != nil {
-		panic(err)
-	}
-
-	data := Read(file)
+	data := Read([]byte("1,1,1\n2,2,2\n?,3,3"), "?")
 	exp := [][]string{
 		{"1", "1", "1"},
 		{"2", "2", "2"},

@@ -3,9 +3,13 @@ package gnn
 import (
 	"testing"
 
+	"fmt"
+
 	"github.com/jacsmith21/gnn/data"
+	"github.com/jacsmith21/gnn/ext/csv"
 	"github.com/jacsmith21/gnn/mat"
 	"github.com/jacsmith21/gnn/vec"
+	"github.com/jacsmith21/repo"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -81,7 +85,26 @@ func TestTrainer(t *testing.T) {
 	assert.Equal(t, expected, predictions)
 }
 
-/*func TestWithDiscreteData(t *testing.T) {
-	file := repo.LoadBreastCancerWisconsinDataSet()
-	fmt.Println(file)
-}*/
+func TestWithDiscreteData(t *testing.T) {
+	bytes := repo.LoadBreastCancerWisconsinDataSet()
+	s := csv.Read(bytes, "?")
+	m := mat.InitFromStringArray(s)
+	m.Drop(0, 1)
+	labels := mat.InitRows(
+		m.Col(m.ColCount() - 1),
+	)
+	m.Drop(m.ColCount()-1, 1)
+	m.Transpose()
+	d := data.Init(data.OneHot(m), data.OneHot(labels))
+	fmt.Println(d.AttributeCount())
+	fmt.Println(d.Sample(0))
+
+	n := Net{
+		NewFC(89, 100),
+		&ReLU{},
+		NewFC(100, 100),
+		&ReLU{},
+		NewFC(100, 2),
+		&SoftMax{},
+	}
+}

@@ -74,3 +74,8 @@ func (d DataSet) Labels() mat.Matrix {
 func (d DataSet) Data() mat.Matrix {
 	return d.data
 }
+
+// AttributeCount returns the number of attributes in a data set
+func (d DataSet) AttributeCount() int {
+	return d.data.RowCount()
+}

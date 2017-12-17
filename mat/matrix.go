@@ -158,3 +158,15 @@ func (m Matrix) Row(i int) vec.Vector {
 
 	return row
 }
+
+func (m *Matrix) Drop(index, axis int) {
+	if axis == 1 {
+		m.cols = append(m.cols[:index], m.cols[index+1:]...)
+	} else if axis == 2 {
+		for j := range m.cols {
+			m.cols[j].Remove(index)
+		}
+	} else {
+		panic("bad axis")
+	}
+}

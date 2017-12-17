@@ -155,3 +155,21 @@ func TestContains(t *testing.T) {
 	assert.Equal(t, false, v.Contains(-1))
 	assert.Equal(t, true, v.Contains(3))
 }
+
+func TestRemove(t *testing.T) {
+	initVector()
+	v.Remove(4)
+	v.Remove(0)
+	assert.Equal(t, Init(1, 2, 3), v)
+}
+
+func TestSoftmax(t *testing.T) {
+	initVector()
+	v.Softmax()
+	assert.InDelta(t, 0.01165623, v.At(0), 0.000001)
+	assert.InDelta(t, 0.03168492, v.At(1), 0.000001)
+	assert.InDelta(t, 0.086128544, v.At(2), 0.000001)
+	assert.InDelta(t, 0.234121657, v.At(3), 0.000001)
+	assert.InDelta(t, 0.636408649, v.At(4), 0.000001)
+	assert.InDelta(t, 1., v.Sum(), 0.000001)
+}

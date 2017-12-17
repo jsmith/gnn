@@ -90,3 +90,15 @@ func TestUtilTranspose(t *testing.T) {
 	assert.Equal(t, 2, m.RowCount())
 	assert.Equal(t, 4, m.ColCount())
 }
+
+func TestInitFromStringArray(t *testing.T) {
+	data := [][]string{
+		{"1", "1", "3"},
+		{"4", "4", "4"},
+	}
+	m := InitFromStringArray(data)
+	assert.Equal(t, InitRows(
+		vec.Init(1, 1, 3),
+		vec.Init(4, 4, 4),
+	), m)
+}

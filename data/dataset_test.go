@@ -83,3 +83,8 @@ func TestData(t *testing.T) {
 	data := d.Data()
 	assert.Equal(t, 4, data.ColCount())
 }
+
+func TestAttributeCount(t *testing.T) {
+	initDataSet()
+	assert.Equal(t, 4, d.AttributeCount())
+}
