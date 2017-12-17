@@ -7,8 +7,6 @@ import (
 	"github.com/jacsmith21/gnn/mat"
 	"github.com/jacsmith21/gnn/vec"
 	"github.com/stretchr/testify/assert"
-	"github.com/jacsmith21/data"
-	"fmt"
 )
 
 var xor data.DataSet
@@ -83,7 +81,7 @@ func TestTrainer(t *testing.T) {
 	assert.Equal(t, expected, predictions)
 }
 
-func TestWithDiscreteData(t *testing.T) {
-	str := repo.LoadBreastCancerWisconsinDataSet()
-	fmt.Println(str[0])
-}
+/*func TestWithDiscreteData(t *testing.T) {
+	file := repo.LoadBreastCancerWisconsinDataSet()
+	fmt.Println(file)
+}*/
