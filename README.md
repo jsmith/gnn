@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/jacsmith21/gnn.png?branch=master)](https://travis-ci.org/jacsmith21/gnn)
 # GNN
-Golang Neural Network (GNN) framework! GNN was built for educational purposes. Currently this framework is able to implement simple fully connected networks.
+Golang Neural Network (GNN) framework! GNN was built for educational purposes to learn about neural networks & goland! Currently this framework is able to implement simple fully connected networks.
 
 # Example
 ```go
@@ -37,4 +37,4 @@ predictions := trainer.Predict(xor.Data())
 See `trainer_test.go:TestTrainer` for a worker example.
 
 
-*[anynet](https://github.com/unixpickle/anynet) heavily used as reference*
+*[anynet](https://github.com/unixpickle/anynet) used as reference*
