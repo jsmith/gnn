@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/jacsmith21/gnn.png?branch=master)](https://travis-ci.org/jacsmith21/gnn)
+[![Build Status](https://travis-ci.org/jsmith/gnn.png?branch=master)](https://travis-ci.org/jsmith/gnn)
 # GNN
 Golang Neural Network (GNN) framework! GNN was built for educational purposes to learn about neural networks & goland! Currently this framework is able to implement simple fully connected networks.
 
